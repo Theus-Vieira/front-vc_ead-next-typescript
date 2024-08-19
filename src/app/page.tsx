@@ -1,3 +1,5 @@
+"use client";
+
 import * as C from "@/components";
 
 export default function Home() {
