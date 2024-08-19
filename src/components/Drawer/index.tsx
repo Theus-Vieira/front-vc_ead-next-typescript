@@ -30,7 +30,7 @@ export const Drawer = ({ toggleIsOpen, children }: IDrawer) => {
 
         <div className="container-button">
           <C.Button onClick={() => navigator.push("/dashboard")}>
-            Curso
+            Acessar
           </C.Button>
         </div>
       </S.Container>

@@ -7,7 +7,7 @@ export const DeadArea = styled.section`
 
   background-color: ${(props) => props.theme.blackAlpha};
 
-  position: absolute;
+  position: fixed;
   z-index: 100;
 `;
 
@@ -22,7 +22,7 @@ export const Container = styled(motion.section)`
 
   padding-bottom: 10rem;
 
-  position: absolute;
+  position: fixed;
   left: 0;
   z-index: 200;
 

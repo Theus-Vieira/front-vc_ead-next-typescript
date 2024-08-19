@@ -49,7 +49,7 @@ export const Container = styled.header`
   @media (min-width: 768px) {
     height: 8rem;
 
-    padding: 1rem 10rem;
+    padding: 1rem 5rem;
 
     & > .container-button {
       width: 7rem;
@@ -72,6 +72,8 @@ export const Container = styled.header`
   }
 
   @media (min-width: 1024px) {
+    padding: 1rem 10rem;
+
     & > .container-button {
       width: 8rem;
     }
@@ -139,12 +141,14 @@ export const Nav = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 
     list-style: none;
 
-    font-size: 12pt;
+    font-size: 9pt;
     font-weight: bold;
+    text-align: center;
+
     color: #f5f6fa;
 
     & > a {

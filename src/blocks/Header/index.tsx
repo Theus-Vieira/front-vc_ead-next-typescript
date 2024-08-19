@@ -19,18 +19,25 @@ export const Header = () => {
       {isOpen && (
         <C.Drawer toggleIsOpen={toggleIsOpen}>
           <S.MobileNav>
-            <Link
-              href="https://marivalcontas.wixsite.com/vccamping"
-              target="_blank"
-            >
-              Acampamento VC
+            <Link href="https://forms.gle/iiag1nAofTb6shsAA" target="_blank">
+              Inscrição
             </Link>
 
-            <Link href="https://www.instagram.com/acampvc/" target="_blank">
-              Insta
+            <Link
+              href="/docs/pastoral_recommendation.pdf"
+              download="Recomendação Pastoral"
+              target="_blank"
+            >
+              Carta de Recomendação Pastoral
             </Link>
-            <li>Menu 3</li>
-            <li>Menu 4</li>
+
+            <Link
+              href="/docs/parents_authorization.pdf"
+              download="Autorização dos Pais"
+              target="_blank"
+            >
+              Autorização dos Pais
+            </Link>
           </S.MobileNav>
         </C.Drawer>
       )}
@@ -44,19 +51,25 @@ export const Header = () => {
         </div>
 
         <S.Nav>
+          <Link href="https://forms.gle/iiag1nAofTb6shsAA" target="_blank">
+            Inscrição
+          </Link>
+
           <Link
-            href="https://marivalcontas.wixsite.com/vccamping"
+            href="/docs/pastoral_recommendation.pdf"
+            download="Recomendação Pastoral"
             target="_blank"
           >
-            Acampamento VC
+            Carta de Recomendação Pastoral
           </Link>
 
-          <Link href="https://www.instagram.com/acampvc/" target="_blank">
-            Insta
+          <Link
+            href="/docs/parents_authorization.pdf"
+            download="Autorização dos Pais"
+            target="_blank"
+          >
+            Autorização dos Pais
           </Link>
-
-          <li>Menu 3</li>
-          <li>Menu 4</li>
         </S.Nav>
 
         <div className="container-button">
@@ -65,7 +78,7 @@ export const Header = () => {
             color="#4a2807"
             onClick={() => navigator.push("/dashboard")}
           >
-            Curso
+            Acessar
           </C.Button>
         </div>
 
