@@ -5,6 +5,6 @@ import { useDarkMode, DarkModeProvider } from "./DarkMode";
 
 export { useDarkMode };
 
-export const providers = ({ children }: { children: ReactNode }) => {
+export const Providers = ({ children }: { children: ReactNode }) => {
   return <DarkModeProvider>{children}</DarkModeProvider>;
 };

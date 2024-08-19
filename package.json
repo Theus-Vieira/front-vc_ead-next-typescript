@@ -2,6 +2,8 @@
   "name": "vc_ead",
   "version": "0.1.0",
   "private": true,
+  "author": {"name": "Matheus Henrique Vieira Cardoso", "email": "matheusth.dev@gmail.com"},
+  "repository": { "url": "https://github.com/Theus-Vieira/front-vc_ead-next-typescript"},
   "scripts": {
     "dev": "next dev",
     "build": "next build",
