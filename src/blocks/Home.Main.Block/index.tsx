@@ -26,8 +26,8 @@ export const HomeMainBlock = () => {
 
         <p>
           Depois, deverá baixar e imprimir a Carta de Recomendação Pastoral e a
-          Autorização dos Pais (se for menor de idade) para entregar,
-          devidamente preenchido, na próxima reunião.
+          Autorização dos Pais (se for menor de idade) para entregar devidamente
+          preenchido na próxima reunião.
         </p>
 
         <p>
@@ -42,7 +42,7 @@ export const HomeMainBlock = () => {
           deverá assistir para liberar um questionário com algumas perguntas
           sobre o que foi debatido na reunião. Todos os candidatos DEVEM
           assistir os vídeos e responder todos os questionários para que seu
-          nome seja cogitados para a equipe do acampamento.
+          nome seja cogitado para a equipe do acampamento.
         </p>
 
         <p>Dito isto, bons estudos!</p>
