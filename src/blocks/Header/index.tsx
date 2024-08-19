@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import * as S from "./styles";
 import * as C from "@/components";
 import { FiMenu } from "react-icons/fi";
+import Link from "next/link";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -18,8 +19,16 @@ export const Header = () => {
       {isOpen && (
         <C.Drawer toggleIsOpen={toggleIsOpen}>
           <S.MobileNav>
-            <li>Menu 1</li>
-            <li>Menu 2</li>
+            <Link
+              href="https://marivalcontas.wixsite.com/vccamping"
+              target="_blank"
+            >
+              Acampamento VC
+            </Link>
+
+            <Link href="https://www.instagram.com/acampvc/" target="_blank">
+              Insta
+            </Link>
             <li>Menu 3</li>
             <li>Menu 4</li>
           </S.MobileNav>
@@ -27,14 +36,25 @@ export const Header = () => {
       )}
 
       <S.Container>
-        <img
-          src="https://i.ibb.co/8z3006c/front-end-logo-color.png"
-          alt="front_end_logo"
-        />
+        <div className="container_image">
+          <img
+            src="https://i.ibb.co/X8qTjz7/logo-vc.png"
+            alt="front_end_logo"
+          />
+        </div>
 
         <S.Nav>
-          <li>Menu 1</li>
-          <li>Menu 2</li>
+          <Link
+            href="https://marivalcontas.wixsite.com/vccamping"
+            target="_blank"
+          >
+            Acampamento VC
+          </Link>
+
+          <Link href="https://www.instagram.com/acampvc/" target="_blank">
+            Insta
+          </Link>
+
           <li>Menu 3</li>
           <li>Menu 4</li>
         </S.Nav>
@@ -42,10 +62,10 @@ export const Header = () => {
         <div className="container-button">
           <C.Button
             primary={false}
-            color="${props => props.theme.txtPrimary}"
-            onClick={() => navigator.push("/login")}
+            color="#4a2807"
+            onClick={() => navigator.push("/dashboard")}
           >
-            Login
+            Curso
           </C.Button>
         </div>
 

@@ -12,14 +12,21 @@ export const Container = styled.header`
 
   background-color: ${(props) => props.theme.primary};
 
-  & > img {
+  & > .container_image {
     height: 100%;
+    border-radius: 50%;
 
-    transition: 0.8s;
+    background-color: white;
 
-    &:hover {
-      transform: scale(1.05) rotate(10deg);
-      transition: 0.3s;
+    & > img {
+      height: 100%;
+
+      transition: 0.8s;
+
+      &:hover {
+        transform: scale(1.05) rotate(10deg);
+        transition: 0.3s;
+      }
     }
   }
 
@@ -139,6 +146,17 @@ export const Nav = styled.ul`
     font-size: 12pt;
     font-weight: bold;
     color: #f5f6fa;
+
+    & > a {
+      color: #f5f6fa;
+
+      &:hover {
+        color: ${(props) => props.theme.secondary};
+
+        transform: scale(1.1) rotate(5deg);
+        transition: 0.3s;
+      }
+    }
 
     & > li {
       transition: 0.8s;

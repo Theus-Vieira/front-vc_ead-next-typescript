@@ -58,7 +58,7 @@ export const Container = styled(motion.section)`
     padding: 0 5rem;
 
     & > button:hover {
-      background-color: yellow;
+      background-color: #f79577;
     }
   }
 
