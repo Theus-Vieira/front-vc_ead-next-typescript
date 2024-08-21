@@ -76,7 +76,7 @@ export const Header = () => {
           <C.Button
             primary={false}
             color="#4a2807"
-            onClick={() => navigator.push("/dashboard")}
+            onClick={() => navigator.push("/login")}
           >
             Acessar
           </C.Button>

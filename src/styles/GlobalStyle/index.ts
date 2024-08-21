@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     outline: none;
     
     scroll-behavior: smooth;
+    font-family: "Inter";
     
     
     ::-webkit-scrollbar {
@@ -32,7 +33,6 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: flex-start;
 
-    font-family: "Inter";
 
     color: ${(props) => props.theme.txtPrimary};
     background-color: ${(props) => props.theme.bgPrimary};
