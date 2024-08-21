@@ -61,5 +61,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const userLogout = async () => {
+    try {
+    } catch (error) {
+      //
+    }
+  };
+
   return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
 };

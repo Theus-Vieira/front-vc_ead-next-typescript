@@ -2,8 +2,13 @@
   "name": "vc_ead",
   "version": "0.1.0",
   "private": true,
-  "author": {"name": "Matheus Henrique Vieira Cardoso", "email": "matheusth.dev@gmail.com"},
-  "repository": { "url": "https://github.com/Theus-Vieira/front-vc_ead-next-typescript"},
+  "author": {
+    "name": "Matheus Henrique Vieira Cardoso",
+    "email": "matheusth.dev@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/Theus-Vieira/front-vc_ead-next-typescript"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +16,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^1.7.4",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.3.28",
     "next": "14.2.5",
     "react": "^18",
@@ -20,6 +27,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
