@@ -46,13 +46,28 @@ export const BoxLogin = styled.section`
     align-items: center;
     gap: 2rem;
 
-    padding: 2rem 1rem;
+    padding: 2rem 2rem;
 
     border-radius: 2rem;
 
-    text-align: center;
-
     background-color: ${(props) => props.theme.bgPrimary};
+
+    & > .box_title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      text-align: center;
+
+      & > h1 {
+        font-size: 20pt;
+      }
+
+      & > p {
+        font-size: 10pt;
+      }
+    }
   }
 
   @media (min-width: 1440px) {

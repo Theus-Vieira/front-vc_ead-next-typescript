@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useRouter } from "next/navigation";
 import * as T from "@/types";
 import { api } from "@/api";
@@ -6,8 +12,8 @@ import { toast } from "react-toastify";
 import "dotenv/config";
 
 interface IUserContext {
-  userLogin: (data: T.ILoginSession) => void;
-  userLogout: () => void;
+  userLogin: (data: T.ILoginSession) => Promise<void>;
+  userLogout: () => Promise<void>;
 }
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -36,9 +42,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const userLogin = async (data: T.ILoginSession) => {
     try {
-      const response: any = await api
-        .post("/login", data)
-        .then((res) => res.data);
+      const response: any = await api.post("/login", data);
 
       const {
         objectId,
@@ -49,7 +53,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         procedure_level,
         sessionToken,
         updatedAt,
-      }: T.IUser = response;
+      }: T.IUser = response.data;
 
       setUser({
         createdAt,
@@ -63,8 +67,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       });
 
       toast.success("Sucesso!");
-
-      router.push("/dashboard");
     } catch (error) {
       toast.error("Erro ao fazer login");
     }
