@@ -1,8 +1,14 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import * as T from "@/types";
+import { api } from "@/api";
+import { toast } from "react-toastify";
+import "dotenv/config";
 
-interface IUserContext {}
+interface IUserContext {
+  userLogin: (data: T.ILoginSession) => void;
+  userLogout: () => void;
+}
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
 
@@ -18,41 +24,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const router = useRouter();
 
-  const createUser = async (data: T.ICreateUser) => {
-    try {
-    } catch (error) {
-      // lançar um toast com o erro
-    }
-  };
+  const createUser = async () => {};
 
-  const updateUser = async (data: T.IUpdateUser) => {
-    try {
-    } catch (error) {
-      // lança um toast
-    }
-  };
+  const updateUser = async () => {};
 
-  const deleteUser = async () => {
-    try {
-    } catch (error) {
-      // lança um toast
-    }
-  };
+  const deleteUser = async () => {};
 
-  const retrieveUser = async () => {
-    try {
-      // router.push("/dashboard")
-    } catch (error) {
-      // lança um toast
-    }
-  };
+  const retrieveUser = async () => {};
 
-  const loadUsers = async () => {
-    try {
-    } catch (error) {
-      // lança um toast
-    }
-  };
+  const loadUsers = async () => {};
 
   const userLogin = async (data: T.ILoginSession) => {
     try {
@@ -68,5 +48,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ userLogin, userLogout }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
