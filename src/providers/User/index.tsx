@@ -36,15 +36,58 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const userLogin = async (data: T.ILoginSession) => {
     try {
+      const response: any = await api
+        .post("/login", data)
+        .then((res) => res.data);
+
+      const {
+        objectId,
+        username,
+        createdAt,
+        is_adm,
+        meeting_level,
+        procedure_level,
+        sessionToken,
+        updatedAt,
+      }: T.IUser = response;
+
+      setUser({
+        createdAt,
+        is_adm,
+        meeting_level,
+        objectId,
+        procedure_level,
+        sessionToken,
+        updatedAt,
+        username,
+      });
+
+      toast.success("Sucesso!");
+
+      router.push("/dashboard");
     } catch (error) {
-      // lança um toast
+      toast.error("Erro ao fazer login");
     }
   };
 
   const userLogout = async () => {
     try {
+      await api.post(
+        "/logout",
+        {},
+        {
+          headers: {
+            "X-Parse-Session-Token": user.sessionToken,
+          },
+        }
+      );
+
+      setUser({} as T.IUser);
+      setUsers([]);
+      toast.success("Bye, bye!");
+      router.push("/");
     } catch (error) {
-      //
+      toast.error("Erro ao fazer logout");
     }
   };
 
