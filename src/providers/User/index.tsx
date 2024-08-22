@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import "dotenv/config";
 
 interface IUserContext {
+  user: T.IUser;
+  users: T.IUser[];
   userLogin: (data: T.ILoginSession) => Promise<void>;
   userLogout: () => Promise<void>;
 }
@@ -96,7 +98,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserContext.Provider value={{ userLogin, userLogout }}>
+    <UserContext.Provider value={{ userLogin, userLogout, user, users }}>
       {children}
     </UserContext.Provider>
   );
