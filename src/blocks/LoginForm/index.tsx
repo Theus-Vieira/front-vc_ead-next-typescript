@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schemas/session";
 import { useUser } from "@/providers";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -15,6 +14,7 @@ export const LoginForm = () => {
   const { userLogin } = useUser();
 
   const {
+    reset,
     handleSubmit,
     register,
     formState: { errors },
@@ -26,6 +26,8 @@ export const LoginForm = () => {
   const handleLogin = async (data: T.ILoginSession) => {
     try {
       await userLogin(data);
+
+      reset();
 
       setTimeout(() => {
         router.push("/dashboard");

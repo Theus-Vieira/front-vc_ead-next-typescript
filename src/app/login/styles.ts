@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem;
+
+  background-color: ${(props) => props.theme.bgSecondary};
+
   @media (min-width: 410px) {
-  }
-
-  @media (min-width: 768px) {
-  }
-
-  @media (min-width: 1024px) {
-  }
-
-  @media (min-width: 1200px) {
     width: 100vw;
     height: 100vh;
 
@@ -18,58 +20,52 @@ export const Container = styled.section`
     justify-content: center;
     align-items: center;
 
-    padding: 10rem;
+    padding: 1rem;
 
     background-color: ${(props) => props.theme.bgSecondary};
-  }
-
-  @media (min-width: 1440px) {
   }
 `;
 
 export const BoxLogin = styled.section`
-  @media (min-width: 410px) {
-  }
+  min-width: 29rem;
+  max-width: 31rem;
 
-  @media (min-width: 768px) {
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
 
-  @media (min-width: 1024px) {
-  }
+  padding: 2rem 2rem;
 
-  @media (min-width: 1200px) {
-    width: 31rem;
+  border-radius: 2rem;
 
+  background-color: ${(props) => props.theme.bgPrimary};
+
+  & > .box_title {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
+    gap: 0.5rem;
 
-    padding: 2rem 2rem;
+    text-align: center;
 
-    border-radius: 2rem;
+    & > h1 {
+      font-size: 20pt;
+    }
 
-    background-color: ${(props) => props.theme.bgPrimary};
-
-    & > .box_title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-
-      text-align: center;
-
-      & > h1 {
-        font-size: 20pt;
-      }
-
-      & > p {
-        font-size: 10pt;
-      }
+    & > p {
+      font-size: 10pt;
     }
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: 410px) {
+    min-width: 35rem;
+    max-width: 40rem;
+  }
+
+  @media (min-width: 1024px) {
+    min-width: 31rem;
+    max-width: 31rem;
   }
 `;

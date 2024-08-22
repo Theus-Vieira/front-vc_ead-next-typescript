@@ -66,6 +66,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         username,
       });
 
+      // lógica para persistir o login no local storage, já que o token nunca expira.
+
       toast.success("Sucesso!");
     } catch (error) {
       toast.error("Erro ao fazer login");
