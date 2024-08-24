@@ -1,30 +1,44 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  @media (min-width: 410px) {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    padding-top: 0;
+  }
+`;
+
+export const HeaderMobile = styled.section`
+  width: 100%;
+  height: 3rem;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 2rem;
+
+  & > svg {
+    font-size: 16pt;
   }
 
   @media (min-width: 768px) {
-  }
-
-  @media (min-width: 1024px) {
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    flex-direction: row;
+    display: none;
   }
 `;
 
 export const BoxMenu = styled.section`
-  @media (min-width: 410px) {
-  }
+  display: none;
 
   @media (min-width: 768px) {
-  }
-
-  @media (min-width: 1024px) {
-    width: 30rem;
+    width: 20rem;
     height: 100%;
 
     display: flex;
@@ -59,26 +73,31 @@ export const BoxMenu = styled.section`
       justify-content: center;
     }
   }
+
+  @media (min-width: 1024px) {
+    width: 30rem;
+  }
 `;
 
 export const BoxContent = styled.section`
-  @media (min-width: 410px) {
-  }
+  width: 100%;
+  height: calc(100vh - 3rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 2rem;
+
+  text-align: center;
 
   @media (min-width: 768px) {
+    width: calc(100vw - 20rem);
+    height: 100%;
   }
 
   @media (min-width: 1024px) {
     width: calc(100vw - 30rem);
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    padding: 2rem;
-
-    text-align: center;
   }
 `;
