@@ -7,11 +7,18 @@ import * as S from "./styles";
 import * as C from "@/components";
 
 interface IDrawer {
+  buttonText: string;
+  buttonRoute: string;
   toggleIsOpen: () => void;
   children: ReactNode;
 }
 
-export const Drawer = ({ toggleIsOpen, children }: IDrawer) => {
+export const Drawer = ({
+  toggleIsOpen,
+  buttonRoute,
+  buttonText,
+  children,
+}: IDrawer) => {
   const navigator = useRouter();
 
   return (
@@ -29,7 +36,9 @@ export const Drawer = ({ toggleIsOpen, children }: IDrawer) => {
         <div className="container-children">{children}</div>
 
         <div className="container-button">
-          <C.Button onClick={() => navigator.push("/login")}>Acessar</C.Button>
+          <C.Button onClick={() => navigator.push(buttonRoute)}>
+            {buttonText}
+          </C.Button>
         </div>
       </S.Container>
     </>
