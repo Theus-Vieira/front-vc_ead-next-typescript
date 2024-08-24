@@ -22,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar {
       display: none;
     }
+    
   }
 
   body {
