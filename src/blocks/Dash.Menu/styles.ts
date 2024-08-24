@@ -8,9 +8,6 @@ export const Container = styled.ul`
   }
 
   @media (min-width: 1024px) {
-  }
-
-  @media (min-width: 1200px) {
     width: 100%;
 
     display: flex;
@@ -44,26 +41,23 @@ export const Container = styled.ul`
 
       animation: moveLeft 0.5s ease-in-out;
     }
+  }
 
-    @keyframes moveRight {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(2rem);
-      }
+  @keyframes moveRight {
+    from {
+      transform: translateX(0);
     }
-
-    @keyframes moveLeft {
-      from {
-        transform: translateX(2rem);
-      }
-      to {
-        transform: translateX(0);
-      }
+    to {
+      transform: translateX(2rem);
     }
   }
 
-  @media (min-width: 1440px) {
+  @keyframes moveLeft {
+    from {
+      transform: translateX(2rem);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 `;

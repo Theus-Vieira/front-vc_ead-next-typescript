@@ -8,16 +8,11 @@ export const Container = styled.section`
   }
 
   @media (min-width: 1024px) {
-  }
-
-  @media (min-width: 1200px) {
     width: 100vw;
     height: 100vh;
 
     display: flex;
-  }
-
-  @media (min-width: 1440px) {
+    flex-direction: row;
   }
 `;
 
@@ -29,9 +24,6 @@ export const BoxMenu = styled.section`
   }
 
   @media (min-width: 1024px) {
-  }
-
-  @media (min-width: 1200px) {
     width: 30rem;
     height: 100%;
 
@@ -67,9 +59,6 @@ export const BoxMenu = styled.section`
       justify-content: center;
     }
   }
-
-  @media (min-width: 1440px) {
-  }
 `;
 
 export const BoxContent = styled.section`
@@ -80,9 +69,6 @@ export const BoxContent = styled.section`
   }
 
   @media (min-width: 1024px) {
-  }
-
-  @media (min-width: 1200px) {
     width: calc(100vw - 30rem);
     height: 100%;
 
@@ -94,8 +80,5 @@ export const BoxContent = styled.section`
     padding: 2rem;
 
     text-align: center;
-  }
-
-  @media (min-width: 1440px) {
   }
 `;
