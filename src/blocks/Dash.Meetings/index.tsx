@@ -3,7 +3,8 @@ import { YouTubePlayer } from "@/components";
 import { useUser } from "@/providers";
 import * as Control from "@/controllers";
 import * as T from "@/types";
-import { useState } from "react";
+import * as C from "@/components";
+import { useEffect, useState } from "react";
 
 interface IDashMeetingsProps {
   content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS";
@@ -16,25 +17,63 @@ export const DashMeetings = ({
   changeContent,
   content,
 }: IDashMeetingsProps) => {
-  const {
-    user: { meeting_level },
-  } = useUser();
+  const [video, setVideo] = useState<T.IVideo | null>(null);
+  const [isViewed, setIsViewed] = useState<boolean>(false);
+  const { user, updateUser } = useUser();
 
-  const [video, setVideo] = useState<T.IVideo>(Control.meetings[meeting_level]);
+  const callbackFinish = async () => {
+    if (user.is_adm || user.meeting_level === Control.meetings.length) {
+      return;
+    }
+
+    await updateUser(
+      { meeting_level: user.meeting_level + 1 },
+      user.objectId,
+      false
+    );
+  };
+
+  useEffect(() => {
+    if (!video) {
+      setIsViewed(false);
+    } else if (user.is_adm || user.meeting_level > video.id) {
+      setIsViewed(true);
+    }
+  }, [video]);
 
   return (
-    <S.Container>
-      <div className="box-title">
-        <h2>Reuniões</h2>
-        <span>
-          Aqui você assistirá os vídeos de resumo das reuniões e responderá os
-          questionários referentes a cada vídeo
-        </span>
-      </div>
+    <>
+      {video && (
+        <C.Modal onAction={() => setVideo(null)}>
+          <YouTubePlayer
+            video={video}
+            isViewed={isViewed}
+            callbackFinish={callbackFinish}
+          />
+        </C.Modal>
+      )}
 
-      <div className="box-video">
-        <YouTubePlayer videoId={video.videoId} formLink={video.formLink} />
-      </div>
-    </S.Container>
+      <S.Container>
+        <div className="box-title">
+          <h2>Reuniões</h2>
+          <span>
+            Aqui você assistirá os vídeos de resumo das reuniões e responderá os
+            questionários referentes a cada vídeo
+          </span>
+        </div>
+
+        <div className="box-video">
+          {Control.meetings.map((vd) => (
+            <h2
+              onClick={() => {
+                setVideo(vd);
+              }}
+            >
+              {vd.videoName}
+            </h2>
+          ))}
+        </div>
+      </S.Container>
+    </>
   );
 };

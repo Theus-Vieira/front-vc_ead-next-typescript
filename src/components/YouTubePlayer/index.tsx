@@ -1,13 +1,14 @@
 import * as S from "./styles";
+import * as T from "@/types";
 import { useState } from "react";
-import YouTube from "react-youtube";
 
 interface IYouTubePlayerProps {
-  videoId: string;
-  formLink: string;
+  video: T.IVideo;
+  isViewed: boolean;
+  callbackFinish: () => void;
 }
 
-export const YouTubePlayer = ({ videoId, formLink }: IYouTubePlayerProps) => {
+export const YouTubePlayer = ({ video, isViewed }: IYouTubePlayerProps) => {
   const [player, setPlayer] = useState<any>(null);
   const [completed, setCompleted] = useState<boolean>(false);
   const [questionnaireLinkVisible, setQuestionnaireLinkVisible] =
@@ -25,11 +26,9 @@ export const YouTubePlayer = ({ videoId, formLink }: IYouTubePlayerProps) => {
   };
 
   const opts = {
-    height: "390",
-    width: "640",
     playerVars: {
       autoplay: 0,
-      controls: 0,
+      controls: isViewed ? 1 : 0,
       modestbranding: 1,
       showinfo: 0,
       disablekb: 1,
@@ -39,8 +38,8 @@ export const YouTubePlayer = ({ videoId, formLink }: IYouTubePlayerProps) => {
 
   return (
     <S.Container>
-      <YouTube
-        videoId={videoId}
+      <S.SYouTube
+        videoId={video.videoId}
         opts={opts}
         onReady={handleReady}
         onStateChange={handleStateChange}
@@ -53,7 +52,7 @@ export const YouTubePlayer = ({ videoId, formLink }: IYouTubePlayerProps) => {
       {questionnaireLinkVisible && (
         <>
           <h2>Parabéns! Você assistiu ao vídeo completamente.</h2>
-          <a href={formLink} target="_blank" rel="noopener noreferrer">
+          <a href={video.formLink} target="_blank" rel="noopener noreferrer">
             Acesse o questionário
           </a>
         </>

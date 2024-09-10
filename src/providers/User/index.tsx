@@ -16,6 +16,11 @@ interface IUserContext {
   users: T.IUser[];
   userLogin: (data: T.ILoginSession) => Promise<void>;
   userLogout: () => Promise<void>;
+  updateUser: (
+    updatedUser: T.IUpdateUser,
+    objectId: string,
+    isMaster: boolean
+  ) => Promise<void>;
 }
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -34,7 +39,32 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const createUser = async () => {};
 
-  const updateUser = async () => {};
+  const updateUser = async (
+    updatedUser: T.IUpdateUser,
+    objectId: string,
+    isMaster: boolean = false
+  ) => {
+    try {
+      const headers: any = {
+        "Content-Type": "application/json",
+        "X-Parse-Application-Id": process.env.APP_ID,
+        "X-Parse-REST-API-Key": process.env.API_KEY,
+        "X-Parse-Session-Token": user.sessionToken,
+      };
+
+      isMaster && (headers["X-Parse-Master-Key"] = process.env.MASTER_KEY);
+
+      await api.put(`/users/${objectId}`, updatedUser, {
+        headers: headers,
+      });
+
+      // retrieveUser()
+      // loadUsers()
+      toast.success("Sucesso!");
+    } catch (error) {
+      toast.error("Erro ao atualizar usuário");
+    }
+  };
 
   const deleteUser = async () => {};
 
@@ -98,7 +128,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserContext.Provider value={{ userLogin, userLogout, user, users }}>
+    <UserContext.Provider
+      value={{ userLogin, userLogout, user, users, updateUser }}
+    >
       {children}
     </UserContext.Provider>
   );
