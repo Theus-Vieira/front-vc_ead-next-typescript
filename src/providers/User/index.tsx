@@ -176,6 +176,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
       // lógica para persistir o login no local storage, já que o token nunca expira.
 
+      is_adm && (await loadUsers());
       toast.success("Sucesso!");
     } catch (error) {
       toast.error("Erro ao fazer login");
