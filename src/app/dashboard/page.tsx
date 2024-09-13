@@ -71,15 +71,9 @@ export default function DashboardPage() {
               ) : content === "MANAGE" ? (
                 <B.DashManage changeContent={changeContent} content={content} />
               ) : content === "MEETINGS" ? (
-                <B.DashMeetings
-                  changeContent={changeContent}
-                  content={content}
-                />
+                <B.DashMeetings />
               ) : content === "PROCEDURES" ? (
-                <B.DashProcedures
-                  changeContent={changeContent}
-                  content={content}
-                />
+                <B.DashProcedures />
               ) : (
                 <B.DashDocs changeContent={changeContent} content={content} />
               )}

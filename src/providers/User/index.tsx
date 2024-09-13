@@ -7,13 +7,20 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import * as T from "@/types";
+import * as control from "@/controllers";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import "dotenv/config";
 
+interface IInfo {
+  meetingsInfo: string;
+  proceduresInfo: string;
+}
+
 interface IUserContext {
   user: T.IUser;
   users: T.IUser[];
+  info: IInfo;
   userLogin: (data: T.ILoginSession) => Promise<void>;
   userLogout: () => Promise<void>;
   updateUser: (
@@ -36,6 +43,11 @@ export const useUser = () => {
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [users, setUsers] = useState<T.IUser[]>([]);
   const [user, setUser] = useState<T.IUser>({} as T.IUser);
+
+  const [info, setInfo] = useState<IInfo>({
+    meetingsInfo: `${user.meeting_level}/${control.meetings.length}`,
+    proceduresInfo: `${user.procedure_level}/${control.procedures.length}`,
+  });
 
   const router = useRouter();
 
@@ -191,6 +203,22 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  useEffect(() => {
+    if (user.is_adm) {
+      setInfo({
+        meetingsInfo: `${control.meetings.length}/${control.meetings.length}`,
+        proceduresInfo: `${control.procedures.length}/${control.procedures.length}`,
+      });
+
+      return;
+    }
+
+    setInfo({
+      meetingsInfo: `${user.meeting_level}/${control.meetings.length}`,
+      proceduresInfo: `${user.procedure_level}/${control.procedures.length}`,
+    });
+  }, [user]);
+
   return (
     <UserContext.Provider
       value={{
@@ -201,6 +229,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         updateUser,
         loadUsers,
         retrieveUser,
+        info,
       }}
     >
       {children}
