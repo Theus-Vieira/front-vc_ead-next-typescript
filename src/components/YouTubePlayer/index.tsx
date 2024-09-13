@@ -14,9 +14,6 @@ export const YouTubePlayer = ({
   callbackFinish,
 }: IYouTubePlayerProps) => {
   const [player, setPlayer] = useState<any>(null);
-  const [completed, setCompleted] = useState<boolean>(false);
-  const [questionnaireLinkVisible, setQuestionnaireLinkVisible] =
-    useState<boolean>(false);
 
   const handleReady = (event: any) => {
     setPlayer(event.target);
@@ -24,8 +21,6 @@ export const YouTubePlayer = ({
 
   const handleStateChange = (event: any) => {
     if (event.data === 0 && player) {
-      setCompleted(true);
-      setQuestionnaireLinkVisible(true);
       callbackFinish();
     }
   };
@@ -43,6 +38,7 @@ export const YouTubePlayer = ({
 
   return (
     <S.Container>
+      <h2>{video.videoName}</h2>
       <S.SYouTube
         videoId={video.videoId}
         opts={opts}

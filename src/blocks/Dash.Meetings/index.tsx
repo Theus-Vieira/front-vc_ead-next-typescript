@@ -20,7 +20,7 @@ export const DashMeetings = ({
 }: IDashMeetingsProps) => {
   const [video, setVideo] = useState<T.IVideo | null>(null);
   const [isViewed, setIsViewed] = useState<boolean>(false);
-  const { user, updateUser, retrieveUser } = useUser();
+  const { user, updateUser } = useUser();
 
   const callbackFinish = async () => {
     if (user.is_adm || user.meeting_level === Control.meetings.length) {
