@@ -4,13 +4,12 @@ import { GrTask, GrWorkshop } from "react-icons/gr";
 import { SlDocs } from "react-icons/sl";
 
 interface IDashHomeProps {
-  content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS";
   changeContent: (
     value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS"
   ) => void;
 }
 
-export const DashHome = ({ changeContent, content }: IDashHomeProps) => {
+export const DashHome = ({ changeContent }: IDashHomeProps) => {
   const { user, info } = useUser();
 
   return (
