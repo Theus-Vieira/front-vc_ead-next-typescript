@@ -17,7 +17,11 @@ export const Header = () => {
   return (
     <>
       {isOpen && (
-        <C.Drawer toggleIsOpen={toggleIsOpen}>
+        <C.Drawer
+          toggleIsOpen={toggleIsOpen}
+          buttonText="Acessar"
+          buttonRoute="/login"
+        >
           <S.MobileNav>
             <Link href="https://forms.gle/iiag1nAofTb6shsAA" target="_blank">
               Inscrição

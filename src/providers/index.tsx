@@ -2,9 +2,14 @@
 
 import { ReactNode } from "react";
 import { useDarkMode, DarkModeProvider } from "./DarkMode";
+import { useUser, UserProvider } from "./User";
 
-export { useDarkMode };
+export { useDarkMode, useUser };
 
 export const Providers = ({ children }: { children: ReactNode }) => {
-  return <DarkModeProvider>{children}</DarkModeProvider>;
+  return (
+    <DarkModeProvider>
+      <UserProvider>{children}</UserProvider>
+    </DarkModeProvider>
+  );
 };

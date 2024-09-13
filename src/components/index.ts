@@ -1,5 +1,17 @@
 import { DarkModeButton } from "./DarkModeButton";
 import { Drawer } from "./Drawer";
 import { Button } from "./Button";
+import { Input } from "./Input";
+import { YouTubePlayer } from "./YouTubePlayer";
+import { Modal } from "./modal";
+import { VideoCard } from "./VideoCard";
 
-export { DarkModeButton, Drawer, Button };
+export {
+  DarkModeButton,
+  Drawer,
+  Button,
+  Input,
+  YouTubePlayer,
+  Modal,
+  VideoCard,
+};
