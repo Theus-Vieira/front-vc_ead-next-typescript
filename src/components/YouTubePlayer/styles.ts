@@ -24,7 +24,7 @@ export const Container = styled.section`
     }
 
     & > h2 {
-      font-size: 18pt;
+      font-size: 16pt;
     }
 
     & > a {

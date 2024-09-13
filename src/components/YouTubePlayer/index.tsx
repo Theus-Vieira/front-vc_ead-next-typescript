@@ -5,10 +5,14 @@ import { useState } from "react";
 interface IYouTubePlayerProps {
   video: T.IVideo;
   isViewed: boolean;
-  callbackFinish: () => void;
+  callbackFinish: (() => void) | (() => Promise<void>);
 }
 
-export const YouTubePlayer = ({ video, isViewed }: IYouTubePlayerProps) => {
+export const YouTubePlayer = ({
+  video,
+  isViewed,
+  callbackFinish,
+}: IYouTubePlayerProps) => {
   const [player, setPlayer] = useState<any>(null);
   const [completed, setCompleted] = useState<boolean>(false);
   const [questionnaireLinkVisible, setQuestionnaireLinkVisible] =
@@ -22,6 +26,7 @@ export const YouTubePlayer = ({ video, isViewed }: IYouTubePlayerProps) => {
     if (event.data === 0 && player) {
       setCompleted(true);
       setQuestionnaireLinkVisible(true);
+      callbackFinish();
     }
   };
 
@@ -32,7 +37,7 @@ export const YouTubePlayer = ({ video, isViewed }: IYouTubePlayerProps) => {
       modestbranding: 1,
       showinfo: 0,
       disablekb: 1,
-      fs: 0,
+      fs: 1,
     },
   };
 
@@ -44,19 +49,6 @@ export const YouTubePlayer = ({ video, isViewed }: IYouTubePlayerProps) => {
         onReady={handleReady}
         onStateChange={handleStateChange}
       />
-
-      {!completed && (
-        <p>Assista ao vídeo completamente para acessar o questionário.</p>
-      )}
-
-      {questionnaireLinkVisible && (
-        <>
-          <h2>Parabéns! Você assistiu ao vídeo completamente.</h2>
-          <a href={video.formLink} target="_blank" rel="noopener noreferrer">
-            Acesse o questionário
-          </a>
-        </>
-      )}
     </S.Container>
   );
 };

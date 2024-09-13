@@ -21,6 +21,8 @@ interface IUserContext {
     objectId: string,
     isMaster: boolean
   ) => Promise<void>;
+  retrieveUser: () => Promise<void>;
+  loadUsers: () => Promise<void>;
 }
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -47,8 +49,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     try {
       const headers: any = {
         "Content-Type": "application/json",
-        "X-Parse-Application-Id": process.env.APP_ID,
-        "X-Parse-REST-API-Key": process.env.API_KEY,
         "X-Parse-Session-Token": user.sessionToken,
       };
 
@@ -58,8 +58,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         headers: headers,
       });
 
-      // retrieveUser()
-      // loadUsers()
+      await retrieveUser();
+      user.is_adm && (await loadUsers());
       toast.success("Sucesso!");
     } catch (error) {
       toast.error("Erro ao atualizar usuário");
@@ -68,9 +68,73 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const deleteUser = async () => {};
 
-  const retrieveUser = async () => {};
+  const retrieveUser = async () => {
+    try {
+      const response: any = await api.get("/users/me", {
+        headers: { "X-Parse-Session-Token": user.sessionToken },
+      });
 
-  const loadUsers = async () => {};
+      const {
+        objectId,
+        username,
+        createdAt,
+        is_adm,
+        meeting_level,
+        procedure_level,
+        sessionToken,
+        updatedAt,
+      }: T.IUser = response.data;
+
+      setUser({
+        createdAt,
+        is_adm,
+        meeting_level,
+        objectId,
+        procedure_level,
+        sessionToken,
+        updatedAt,
+        username,
+      });
+    } catch (error) {
+      toast.error("Erro ao buscar informação do usuário");
+
+      retrieveUser();
+    }
+  };
+
+  const loadUsers = async () => {
+    try {
+      const response: any = await api.get("/users", {
+        headers: { "X-Parse-Session-Token": user.sessionToken },
+      });
+
+      const usersList = response.data.results.map((usr: T.IUser) => {
+        const {
+          objectId,
+          username,
+          createdAt,
+          is_adm,
+          meeting_level,
+          procedure_level,
+          updatedAt,
+        } = usr;
+
+        return {
+          objectId,
+          username,
+          createdAt,
+          is_adm,
+          meeting_level,
+          procedure_level,
+          updatedAt,
+        };
+      });
+
+      setUsers(usersList);
+    } catch (error) {
+      toast.error("Erro ao buscar todos os usuários");
+    }
+  };
 
   const userLogin = async (data: T.ILoginSession) => {
     try {
@@ -129,7 +193,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <UserContext.Provider
-      value={{ userLogin, userLogout, user, users, updateUser }}
+      value={{
+        userLogin,
+        userLogout,
+        user,
+        users,
+        updateUser,
+        loadUsers,
+        retrieveUser,
+      }}
     >
       {children}
     </UserContext.Provider>

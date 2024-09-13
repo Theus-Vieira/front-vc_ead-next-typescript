@@ -5,6 +5,7 @@ import * as Control from "@/controllers";
 import * as T from "@/types";
 import * as C from "@/components";
 import { useEffect, useState } from "react";
+import { v4 as uuid } from "uuid";
 
 interface IDashMeetingsProps {
   content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS";
@@ -19,7 +20,7 @@ export const DashMeetings = ({
 }: IDashMeetingsProps) => {
   const [video, setVideo] = useState<T.IVideo | null>(null);
   const [isViewed, setIsViewed] = useState<boolean>(false);
-  const { user, updateUser } = useUser();
+  const { user, updateUser, retrieveUser } = useUser();
 
   const callbackFinish = async () => {
     if (user.is_adm || user.meeting_level === Control.meetings.length) {
@@ -41,10 +42,18 @@ export const DashMeetings = ({
     }
   }, [video]);
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <>
       {video && (
-        <C.Modal onAction={() => setVideo(null)}>
+        <C.Modal
+          onAction={() => {
+            setVideo(null);
+          }}
+        >
           <YouTubePlayer
             video={video}
             isViewed={isViewed}
@@ -63,15 +72,18 @@ export const DashMeetings = ({
         </div>
 
         <div className="box-video">
-          {Control.meetings.map((vd) => (
-            <h2
-              onClick={() => {
-                setVideo(vd);
-              }}
-            >
-              {vd.videoName}
-            </h2>
-          ))}
+          {Control.meetings.map((vd) => {
+            if (user.meeting_level >= vd.id || user.is_adm) {
+              return (
+                <C.VideoCard
+                  type="MEETING"
+                  video={vd}
+                  key={uuid()}
+                  onActionPlay={() => setVideo(vd)}
+                />
+              );
+            }
+          })}
         </div>
       </S.Container>
     </>

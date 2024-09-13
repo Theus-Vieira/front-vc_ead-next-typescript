@@ -14,7 +14,7 @@ export interface IUser {
   is_adm: boolean;
   createdAt: Date;
   updatedAt: Date;
-  sessionToken: string;
+  sessionToken?: string;
 }
 
 export interface IUpdateUser {

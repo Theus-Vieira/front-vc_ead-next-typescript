@@ -23,17 +23,44 @@ export const Container = styled.section`
     overflow: hidden auto;
 
     & > .box-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+
       & > h2 {
-        font-size: 20pt;
+        font-size: 24pt;
         font-weight: bold;
       }
 
       & > span {
-        font-size: 14pt;
+        font-size: 10pt;
       }
     }
-  }
 
-  @media (min-width: 1440px) {
+    & > .box-video {
+      width: 80%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+
+      & > h2 {
+        font-size: 15pt;
+
+        cursor: pointer;
+
+        transition: 0.8s;
+
+        &:hover {
+          color: ${(props) => props.theme.secondary};
+
+          transition: 0.3s;
+        }
+      }
+    }
   }
 `;
