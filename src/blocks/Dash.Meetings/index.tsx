@@ -1,29 +1,18 @@
 import * as S from "./styles";
-import { YouTubePlayer } from "@/components";
 import { useUser } from "@/providers";
-import * as Control from "@/controllers";
+import * as control from "@/controllers";
 import * as T from "@/types";
 import * as C from "@/components";
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 
-interface IDashMeetingsProps {
-  content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS";
-  changeContent: (
-    value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS"
-  ) => void;
-}
-
-export const DashMeetings = ({
-  changeContent,
-  content,
-}: IDashMeetingsProps) => {
+export const DashMeetings = () => {
   const [video, setVideo] = useState<T.IVideo | null>(null);
   const [isViewed, setIsViewed] = useState<boolean>(false);
   const { user, updateUser } = useUser();
 
   const callbackFinish = async () => {
-    if (user.is_adm || user.meeting_level === Control.meetings.length) {
+    if (user.is_adm || user.meeting_level === control.meetings.length) {
       return;
     }
 
@@ -42,10 +31,6 @@ export const DashMeetings = ({
     }
   }, [video]);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <>
       {video && (
@@ -54,7 +39,7 @@ export const DashMeetings = ({
             setVideo(null);
           }}
         >
-          <YouTubePlayer
+          <C.YouTubePlayer
             video={video}
             isViewed={isViewed}
             callbackFinish={callbackFinish}
@@ -72,7 +57,7 @@ export const DashMeetings = ({
         </div>
 
         <div className="box-video">
-          {Control.meetings.map((vd) => {
+          {control.meetings.map((vd) => {
             if (user.meeting_level >= vd.id || user.is_adm) {
               return (
                 <C.VideoCard
