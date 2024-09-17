@@ -23,12 +23,13 @@ interface IUserContext {
   info: IInfo;
   userLogin: (data: T.ILoginSession) => Promise<void>;
   userLogout: () => Promise<void>;
+  createUser: (createdUser: T.ICreateUser) => Promise<void>;
   updateUser: (
     updatedUser: T.IUpdateUser,
     objectId: string,
     isMaster: boolean
   ) => Promise<void>;
-  retrieveUser: () => Promise<void>;
+  retrieveUser: (token?: string) => Promise<void>;
   loadUsers: () => Promise<void>;
 }
 
@@ -51,7 +52,33 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const router = useRouter();
 
-  const createUser = async () => {};
+  const createUser = async (createdUser: T.ICreateUser) => {
+    try {
+      const response: any = await api.post("/users", createdUser, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const createdToken = response.data.sessionToken;
+
+      await api.post(
+        "/logout",
+        {},
+        {
+          headers: {
+            "X-Parse-Session-Token": createdToken,
+          },
+        }
+      );
+
+      toast.success("usuário criado com sucesso!");
+
+      await loadUsers();
+    } catch (error) {
+      toast.error(
+        "Erro ao criar um usuário, verifique se o nome de usuário já existe."
+      );
+    }
+  };
 
   const updateUser = async (
     updatedUser: T.IUpdateUser,
@@ -80,10 +107,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const deleteUser = async () => {};
 
-  const retrieveUser = async () => {
+  const retrieveUser = async (token?: string) => {
+    const userToken = token || user.sessionToken;
+
     try {
       const response: any = await api.get("/users/me", {
-        headers: { "X-Parse-Session-Token": user.sessionToken },
+        headers: { "X-Parse-Session-Token": userToken },
       });
 
       const {
@@ -109,8 +138,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       });
     } catch (error) {
       toast.error("Erro ao buscar informação do usuário");
-
-      retrieveUser();
     }
   };
 
@@ -174,7 +201,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         username,
       });
 
-      // lógica para persistir o login no local storage, já que o token nunca expira.
+      localStorage.setItem("@VC-EAD-TOKEN", sessionToken!);
 
       is_adm && (await loadUsers());
       toast.success("Sucesso!");
@@ -195,6 +222,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         }
       );
 
+      localStorage.removeItem("@VC-EAD-TOKEN");
       setUser({} as T.IUser);
       setUsers([]);
       toast.success("Bye, bye!");
@@ -220,11 +248,24 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     });
   }, [user]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("@VC-EAD-TOKEN");
+
+    if (token) {
+      try {
+        retrieveUser(token).then((_) => router.push("/dashboard"));
+      } catch (error) {
+        toast.error("Erro ao fazer relogin");
+      }
+    }
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
         userLogin,
         userLogout,
+        createUser,
         user,
         users,
         updateUser,

@@ -7,7 +7,7 @@ export const Container = styled.section`
   display: flex;
   align-items: center;
 
-  border: 2px solid ${(props) => props.theme.txtPrimary};
+  border: 1px solid ${(props) => props.theme.txtPrimary};
   border-radius: 1rem;
 
   white-space: nowrap;
@@ -40,8 +40,8 @@ export const Container = styled.section`
     justify-content: center;
     align-items: center;
 
-    border-left: 2px solid ${(props) => props.theme.txtPrimary};
-    border-right: 2px solid ${(props) => props.theme.txtPrimary};
+    border-left: 1px solid ${(props) => props.theme.txtPrimary};
+    border-right: 1px solid ${(props) => props.theme.txtPrimary};
 
     & > h3 {
       width: 100%;
