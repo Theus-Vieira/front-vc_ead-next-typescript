@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "VC EAD",
   description:
     "Plataforma de comunicação interna do Acampamento Voluntários de Cristo",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -17,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body className={inter.className}>
         <Config>{children}</Config>
       </body>
