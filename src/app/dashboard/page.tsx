@@ -67,21 +67,15 @@ export default function DashboardPage() {
 
             <S.BoxContent>
               {content === "HOME" ? (
-                <B.DashHome changeContent={changeContent} content={content} />
+                <B.DashHome changeContent={changeContent} />
               ) : content === "MANAGE" ? (
                 <B.DashManage changeContent={changeContent} content={content} />
               ) : content === "MEETINGS" ? (
-                <B.DashMeetings
-                  changeContent={changeContent}
-                  content={content}
-                />
+                <B.DashMeetings />
               ) : content === "PROCEDURES" ? (
-                <B.DashProcedures
-                  changeContent={changeContent}
-                  content={content}
-                />
+                <B.DashProcedures />
               ) : (
-                <B.DashDocs changeContent={changeContent} content={content} />
+                <B.DashDocs />
               )}
             </S.BoxContent>
           </S.Container>

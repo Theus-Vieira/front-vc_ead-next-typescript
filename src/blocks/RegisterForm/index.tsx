@@ -1,42 +1,50 @@
+import { FiLock, FiUser } from "react-icons/fi";
 import * as S from "./styles";
 import * as C from "@/components";
-import * as T from "@/types";
-import { FiLock, FiUser } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/schemas/session";
+import { createUserSchema } from "@/schemas/user";
 import { useUser } from "@/providers";
-import { useRouter } from "next/navigation";
+import { ICreateUser } from "@/types";
 
-export const LoginForm = () => {
-  const router = useRouter();
+interface ICreate {
+  username: string;
+  password: string;
+}
 
-  const { userLogin } = useUser();
+interface IRegiterFormProps {
+  callbackCreateFinish: () => void;
+}
+
+export const RegisterForm = ({ callbackCreateFinish }: IRegiterFormProps) => {
+  const { createUser } = useUser();
 
   const {
     reset,
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<T.ILoginSession>({
+  } = useForm<ICreate>({
     reValidateMode: "onSubmit",
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(createUserSchema),
   });
 
-  const handleLogin = async (data: T.ILoginSession) => {
-    try {
-      await userLogin(data);
+  const handleRegister = async (data: ICreate) => {
+    const createdUser: ICreateUser = {
+      ...data,
+      is_adm: false,
+      meeting_level: 0,
+      procedure_level: 0,
+    };
 
-      reset();
+    await createUser(createdUser);
 
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 3000);
-    } catch (error) {}
+    reset();
+    callbackCreateFinish();
   };
 
   return (
-    <S.Container onSubmit={handleSubmit(handleLogin)}>
+    <S.Container onSubmit={handleSubmit(handleRegister)}>
       <C.Input
         label="Usuário"
         type="text"
@@ -56,13 +64,9 @@ export const LoginForm = () => {
         error={errors.password?.message}
       />
 
-      <C.Button radius=".8rem" height="3.5rem">
-        Entrar
+      <C.Button type="submit" radius=".8rem" height="3.5rem">
+        Cadastrar
       </C.Button>
-
-      <span>
-        Não tem login? Entre em contato com a liderança do acampamento.
-      </span>
     </S.Container>
   );
 };

@@ -1,14 +1,32 @@
-interface IDashDocsProps {
-  content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS";
-  changeContent: (
-    value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS"
-  ) => void;
-}
+import Link from "next/link";
+import * as S from "./styles";
 
-export const DashDocs = ({ changeContent, content }: IDashDocsProps) => {
+export const DashDocs = () => {
   return (
-    <>
-      <h2>DashDocs</h2>
-    </>
+    <S.Container>
+      <h2>Documentos</h2>
+      <p>
+        Aqui você irá baixar os arquivos para imprimir os documentos necessários
+        para a sua candidatura à equipe do Acampamento Voluntários de Cristo.
+      </p>
+
+      <div className="box-links">
+        <Link
+          href="/docs/pastoral_recommendation.pdf"
+          download="Recomendação Pastoral"
+          target="_blank"
+        >
+          Carta de Recomendação Pastoral
+        </Link>
+
+        <Link
+          href="/docs/parents_authorization.pdf"
+          download="Autorização dos Pais"
+          target="_blank"
+        >
+          Autorização dos Pais
+        </Link>
+      </div>
+    </S.Container>
   );
 };

@@ -6,6 +6,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import InputMask from "react-input-mask";
 import { InputHTMLAttributes } from "react";
 import { IconType } from "react-icons";
+import { Modal } from "../modal";
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -47,53 +48,70 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
     ref
   ) => {
     const [isPassword, setIsPassword] = useState<boolean>(true);
+    const [isMessageOpen, setIsMessageOpen] = useState<boolean>(false);
 
     useEffect(() => {
       type === "password" ? setIsPassword(true) : setIsPassword(false);
     }, [type]);
 
     return (
-      <S.Container width={width} height={height} color={color}>
-        <div>
-          {label} {!!error && <span title={error}> - {error}</span>}
-        </div>
-        <S.InputContainer
-          isErrored={!!error}
-          borderColor={borderColor}
-          radius={radius}
-          color={color}
-          iconSize={iconSize}
-          iconAction={iconAction}
-        >
-          {Icon && iconPosition === "before" && <Icon onClick={iconAction} />}
-          {mask ? (
-            <InputMask type={type} mask={mask} {...rest} inputRef={ref} />
-          ) : type === "password" ? (
-            <>
-              <input
-                type={isPassword ? "password" : "text"}
-                {...rest}
-                ref={ref}
-              />
-              {isPassword && (
-                <FiEye
-                  onClick={(_) => setIsPassword(!isPassword)}
-                  className="password_eye"
+      <>
+        {isMessageOpen && (
+          <Modal onAction={() => setIsMessageOpen(false)}>{error}</Modal>
+        )}
+        <S.Container width={width} height={height} color={color}>
+          <div>
+            {label}{" "}
+            {!!error && (
+              <span
+                title={error}
+                onClick={() => {
+                  setIsMessageOpen(true);
+                }}
+              >
+                {" "}
+                - {error}
+              </span>
+            )}
+          </div>
+          <S.InputContainer
+            isErrored={!!error}
+            borderColor={borderColor}
+            radius={radius}
+            color={color}
+            iconSize={iconSize}
+            iconAction={iconAction}
+          >
+            {Icon && iconPosition === "before" && <Icon onClick={iconAction} />}
+            {mask ? (
+              <InputMask type={type} mask={mask} {...rest} inputRef={ref} />
+            ) : type === "password" ? (
+              <>
+                <input
+                  type={isPassword ? "password" : "text"}
+                  {...rest}
+                  ref={ref}
                 />
-              )}
-              {!isPassword && (
-                <FiEyeOff
-                  onClick={(_) => setIsPassword(!isPassword)}
-                  className="password_eye"
-                />
-              )}
-            </>
-          ) : (
-            <input type={type} {...rest} ref={ref} />
-          )}
-          {Icon && iconPosition === "after" && <Icon onClick={iconAction} />}
-        </S.InputContainer>
-      </S.Container>
+                {isPassword && (
+                  <FiEye
+                    onClick={(_) => setIsPassword(!isPassword)}
+                    className="password_eye"
+                  />
+                )}
+                {!isPassword && (
+                  <FiEyeOff
+                    onClick={(_) => setIsPassword(!isPassword)}
+                    className="password_eye"
+                  />
+                )}
+              </>
+            ) : (
+              <input type={type} {...rest} ref={ref} />
+            )}
+            {Icon && iconPosition === "after" && <Icon onClick={iconAction} />}
+          </S.InputContainer>
+        </S.Container>
+      </>
     );
   }
 );

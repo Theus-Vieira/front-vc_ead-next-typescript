@@ -7,21 +7,30 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import * as T from "@/types";
+import * as control from "@/controllers";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import "dotenv/config";
 
+interface IInfo {
+  meetingsInfo: string;
+  proceduresInfo: string;
+}
+
 interface IUserContext {
   user: T.IUser;
   users: T.IUser[];
+  info: IInfo;
   userLogin: (data: T.ILoginSession) => Promise<void>;
   userLogout: () => Promise<void>;
+  createUser: (createdUser: T.ICreateUser) => Promise<void>;
   updateUser: (
     updatedUser: T.IUpdateUser,
     objectId: string,
     isMaster: boolean
   ) => Promise<void>;
-  retrieveUser: () => Promise<void>;
+  deleteUser: (usr: T.IUser) => Promise<void>;
+  retrieveUser: (token?: string) => Promise<void>;
   loadUsers: () => Promise<void>;
 }
 
@@ -37,9 +46,40 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [users, setUsers] = useState<T.IUser[]>([]);
   const [user, setUser] = useState<T.IUser>({} as T.IUser);
 
+  const [info, setInfo] = useState<IInfo>({
+    meetingsInfo: `${user.meeting_level}/${control.meetings.length}`,
+    proceduresInfo: `${user.procedure_level}/${control.procedures.length}`,
+  });
+
   const router = useRouter();
 
-  const createUser = async () => {};
+  const createUser = async (createdUser: T.ICreateUser) => {
+    try {
+      const response: any = await api.post("/users", createdUser, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const createdToken = response.data.sessionToken;
+
+      await api.post(
+        "/logout",
+        {},
+        {
+          headers: {
+            "X-Parse-Session-Token": createdToken,
+          },
+        }
+      );
+
+      toast.success("usuário criado com sucesso!");
+
+      await loadUsers();
+    } catch (error) {
+      toast.error(
+        "Erro ao criar um usuário, verifique se o nome de usuário já existe."
+      );
+    }
+  };
 
   const updateUser = async (
     updatedUser: T.IUpdateUser,
@@ -66,12 +106,36 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const deleteUser = async () => {};
+  const deleteUser = async (usr: T.IUser) => {
+    if (usr.is_adm) {
+      toast.error(
+        "Operação cancelada pois você tentou deletar um ADM. Se você deseja realmente deletar um administrador, entre em contato com o desenvolvedor"
+      );
+      return;
+    }
 
-  const retrieveUser = async () => {
+    try {
+      await api.delete(`/users/${usr.objectId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Parse-Session-Token": user.sessionToken,
+          "X-Parse-Master-Key": process.env.MASTER_KEY,
+        },
+      });
+
+      user.is_adm && (await loadUsers());
+      toast.success("Sucesso!");
+    } catch (error) {
+      toast.error("Erro ao deletar usuário");
+    }
+  };
+
+  const retrieveUser = async (token?: string) => {
+    const userToken = token || user.sessionToken;
+
     try {
       const response: any = await api.get("/users/me", {
-        headers: { "X-Parse-Session-Token": user.sessionToken },
+        headers: { "X-Parse-Session-Token": userToken },
       });
 
       const {
@@ -98,7 +162,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       toast.error("Erro ao buscar informação do usuário");
 
-      retrieveUser();
+      localStorage.removeItem("@VC-EAD-TOKEN");
+      setUser({} as T.IUser);
+      setUsers([]);
+      router.push("/");
     }
   };
 
@@ -132,7 +199,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
       setUsers(usersList);
     } catch (error) {
-      toast.error("Erro ao buscar todos os usuários");
+      toast.error(
+        "Erro ao buscar todos os usuários. Será necessário fazer o login novamente"
+      );
+      await userLogout();
+      localStorage.removeItem("@VC-EAD-TOKEN");
+      router.push("/");
+      setUser({} as T.IUser);
+      setUsers([]);
     }
   };
 
@@ -162,8 +236,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         username,
       });
 
-      // lógica para persistir o login no local storage, já que o token nunca expira.
+      localStorage.setItem("@VC-EAD-TOKEN", sessionToken!);
 
+      is_adm && (await loadUsers());
       toast.success("Sucesso!");
     } catch (error) {
       toast.error("Erro ao fazer login");
@@ -182,6 +257,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         }
       );
 
+      localStorage.removeItem("@VC-EAD-TOKEN");
       setUser({} as T.IUser);
       setUsers([]);
       toast.success("Bye, bye!");
@@ -191,16 +267,47 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  useEffect(() => {
+    if (user.is_adm) {
+      setInfo({
+        meetingsInfo: `${control.meetings.length}/${control.meetings.length}`,
+        proceduresInfo: `${control.procedures.length}/${control.procedures.length}`,
+      });
+
+      return;
+    }
+
+    setInfo({
+      meetingsInfo: `${user.meeting_level}/${control.meetings.length}`,
+      proceduresInfo: `${user.procedure_level}/${control.procedures.length}`,
+    });
+  }, [user]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("@VC-EAD-TOKEN");
+
+    if (token) {
+      try {
+        retrieveUser(token).then((_) => router.push("/dashboard"));
+      } catch (error) {
+        toast.error("Erro ao fazer relogin");
+      }
+    }
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
         userLogin,
         userLogout,
+        createUser,
         user,
         users,
         updateUser,
+        deleteUser,
         loadUsers,
         retrieveUser,
+        info,
       }}
     >
       {children}
