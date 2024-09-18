@@ -79,7 +79,7 @@ export const InputContainer = styled.div<ISInputProps>`
     flex: 1;
     align-items: center;
     background: transparent;
-    color: ${(props) => props.color || props.theme.txttPrimary};
+    color: ${(props) => props.color || props.theme.txtPrimary};
 
     &::placeholder {
       color: ${(props) => props.theme.txtPrimary}75;

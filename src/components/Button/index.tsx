@@ -1,11 +1,11 @@
-import { forwardRef } from "react";
+import { forwardRef, ReactNode } from "react";
 import * as S from "./styles";
 
 import { ButtonHTMLAttributes } from "react";
 import { IconType } from "react-icons";
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: ReactNode;
   primary?: boolean;
   icon?: IconType;
   iconPosition?: "before" | "after";

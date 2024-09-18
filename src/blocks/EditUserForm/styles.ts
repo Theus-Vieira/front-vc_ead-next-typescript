@@ -12,4 +12,13 @@ export const Container = styled.form`
   & > button {
     margin-top: 0.5rem;
   }
+
+  & > .box-actions {
+    width: 100%;
+
+    margin-top: -0.5rem;
+
+    display: flex;
+    gap: 1rem;
+  }
 `;

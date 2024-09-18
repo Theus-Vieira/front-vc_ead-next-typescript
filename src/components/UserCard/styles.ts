@@ -1,5 +1,23 @@
 import styled from "styled-components";
 
+export const ContainerEdit = styled.section`
+  width: 25rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  & > h2 {
+    font-size: 18pt;
+  }
+
+  @media (min-width: 410px) {
+    width: 31rem;
+  }
+`;
+
 export const Container = styled.section`
   width: 100%;
   height: 4rem;

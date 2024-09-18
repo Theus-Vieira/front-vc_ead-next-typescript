@@ -20,7 +20,10 @@ export const DashManage = () => {
     <>
       {isAddOpen && (
         <C.Modal onAction={toggleIsAddOpen}>
-          <B.RegisterForm callbackCreateFinish={toggleIsAddOpen} />
+          <S.ContainerRegister>
+            <h2>Cadastrar Equipante</h2>
+            <B.RegisterForm callbackCreateFinish={toggleIsAddOpen} />
+          </S.ContainerRegister>
         </C.Modal>
       )}
 
