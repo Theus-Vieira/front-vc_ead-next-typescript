@@ -1,8 +1,10 @@
-/** @type {import('next').NextConfig} */
-import "dotenv/config";
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+});
 
-const nextConfig = {
-  reactStrictMode: true,
+module.exports = withPWA({
   compiler: {
     styledComponents: true,
   },
@@ -11,6 +13,4 @@ const nextConfig = {
     API_KEY: process.env.API_KEY,
     MASTER_KEY: process.env.MASTER_KEY,
   },
-};
-
-export default nextConfig;
+});

@@ -1,0 +1,22 @@
+{
+  "name": "Acamp VC EAD",
+  "short_name": "VC EAD",
+  "description": "Mini curso e área do candidato a equipante do acampamento Voluntários de Cristo.",
+  "theme_color": "#804b1b",
+  "background_color": "#313131",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
