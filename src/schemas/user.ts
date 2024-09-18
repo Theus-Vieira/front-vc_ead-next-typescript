@@ -24,16 +24,28 @@ export const editUserSchema = z
     ({ password }) => {
       if (!password) return true;
 
-      return (
+      console.log(/^\S*$/.test(password));
+      console.log(/[A-Z]/.test(password));
+      console.log(/[a-z]/.test(password));
+      console.log(/\d/.test(password));
+      console.log(/\W/.test(password));
+      console.log(password.length >= 8);
+
+      if (
         /^\S*$/.test(password) &&
         /[A-Z]/.test(password) &&
         /[a-z]/.test(password) &&
         /\d/.test(password) &&
         /\W/.test(password) &&
         password.length >= 8
-      );
+      ) {
+        return true;
+      }
+
+      return false;
     },
     {
+      path: ["password"],
       message:
         "A senha deve conter:\n- No mínimo 8 caracteres\n- Ao menos 1 letra maiúscula\n- Ao menos 1 letra minúscula\n- Ao menos 1 número\n- Ao menos 1 caracter especial\n- Não pode haver espaços em branco",
     }

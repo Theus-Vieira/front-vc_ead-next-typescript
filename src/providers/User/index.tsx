@@ -29,6 +29,7 @@ interface IUserContext {
     objectId: string,
     isMaster: boolean
   ) => Promise<void>;
+  deleteUser: (usr: T.IUser) => Promise<void>;
   retrieveUser: (token?: string) => Promise<void>;
   loadUsers: () => Promise<void>;
 }
@@ -105,7 +106,29 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const deleteUser = async () => {};
+  const deleteUser = async (usr: T.IUser) => {
+    if (usr.is_adm) {
+      toast.error(
+        "Operação cancelada pois você tentou deletar um ADM. Se você deseja realmente deletar um administrador, entre em contato com o desenvolvedor"
+      );
+      return;
+    }
+
+    try {
+      await api.delete(`/users/${usr.objectId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Parse-Session-Token": user.sessionToken,
+          "X-Parse-Master-Key": process.env.MASTER_KEY,
+        },
+      });
+
+      user.is_adm && (await loadUsers());
+      toast.success("Sucesso!");
+    } catch (error) {
+      toast.error("Erro ao deletar usuário");
+    }
+  };
 
   const retrieveUser = async (token?: string) => {
     const userToken = token || user.sessionToken;
@@ -138,6 +161,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       });
     } catch (error) {
       toast.error("Erro ao buscar informação do usuário");
+
+      localStorage.removeItem("@VC-EAD-TOKEN");
+      setUser({} as T.IUser);
+      setUsers([]);
+      router.push("/");
     }
   };
 
@@ -171,7 +199,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
       setUsers(usersList);
     } catch (error) {
-      toast.error("Erro ao buscar todos os usuários");
+      toast.error(
+        "Erro ao buscar todos os usuários. Será necessário fazer o login novamente"
+      );
+      await userLogout();
+      localStorage.removeItem("@VC-EAD-TOKEN");
+      router.push("/");
+      setUser({} as T.IUser);
+      setUsers([]);
     }
   };
 
@@ -269,6 +304,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         user,
         users,
         updateUser,
+        deleteUser,
         loadUsers,
         retrieveUser,
         info,

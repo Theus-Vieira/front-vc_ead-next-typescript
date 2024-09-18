@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IContainerProps {
+  isAdm: boolean;
+}
+
 export const ContainerEdit = styled.section`
   width: 25rem;
 
@@ -18,14 +22,15 @@ export const ContainerEdit = styled.section`
   }
 `;
 
-export const Container = styled.section`
+export const Container = styled.section<IContainerProps>`
   width: 100%;
   height: 4rem;
 
   display: flex;
   align-items: center;
 
-  border: 1px solid ${(props) => props.theme.txtPrimary};
+  border: 1px solid
+    ${(props) => (props.isAdm ? props.theme.error : props.theme.txtPrimary)};
   border-radius: 1rem;
 
   white-space: nowrap;
@@ -58,8 +63,10 @@ export const Container = styled.section`
     justify-content: center;
     align-items: center;
 
-    border-left: 1px solid ${(props) => props.theme.txtPrimary};
-    border-right: 1px solid ${(props) => props.theme.txtPrimary};
+    border-left: 1px solid
+      ${(props) => (props.isAdm ? props.theme.error : props.theme.txtPrimary)};
+    border-right: 1px solid
+      ${(props) => (props.isAdm ? props.theme.error : props.theme.txtPrimary)};
 
     & > h3 {
       width: 100%;

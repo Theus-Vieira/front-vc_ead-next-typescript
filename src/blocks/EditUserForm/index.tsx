@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useUser } from "@/providers";
 import { FiLock, FiTrash, FiTrash2, FiUser } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 interface IEdit {
   username?: string;
@@ -21,7 +22,7 @@ export const EditUserForm = ({
   user,
   callBackEditFinish,
 }: IEditUserFormProps) => {
-  const { updateUser } = useUser();
+  const { updateUser, deleteUser } = useUser();
 
   const {
     reset,
@@ -33,9 +34,23 @@ export const EditUserForm = ({
     resolver: zodResolver(editUserSchema),
   });
 
-  const handleEdit = (data: IEdit) => {
-    console.log(data);
+  const handleEdit = async (data: IEdit) => {
+    if (data.username === user.username) {
+      delete data.username;
+    }
 
+    if (!data.password) {
+      delete data.password;
+    }
+
+    if (!data.username && !data.password) {
+      toast.error("Não é possível editar sem novos dados!");
+      reset();
+      callBackEditFinish();
+      return;
+    }
+
+    await updateUser(data, user.objectId, true);
     reset();
     callBackEditFinish();
   };
@@ -52,7 +67,10 @@ export const EditUserForm = ({
   };
 
   const handleDelete = async () => {
-    // deletar usuário
+    await deleteUser(user);
+
+    reset();
+    callBackEditFinish();
   };
 
   return (
@@ -90,6 +108,7 @@ export const EditUserForm = ({
           width="70%"
           bgColor="#e1b12c"
           color="#2f3640"
+          onClick={handleReset}
         >
           Resetar
         </C.Button>
@@ -100,6 +119,7 @@ export const EditUserForm = ({
           height="3.5rem"
           width="30%"
           bgColor="#c0392b"
+          onClick={handleDelete}
         >
           <FiTrash2 />
         </C.Button>

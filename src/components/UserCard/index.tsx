@@ -35,7 +35,7 @@ export const UserCard = ({ user }: IUserCardProps) => {
           </S.ContainerEdit>
         </Modal>
       )}
-      <S.Container>
+      <S.Container isAdm={user.is_adm}>
         <div className="box-username">
           <h3 title={user.username}>{user.username}</h3>
         </div>
