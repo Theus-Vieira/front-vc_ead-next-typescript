@@ -90,6 +90,8 @@ export const BoxContent = styled.section`
 
   padding: 2rem;
 
+  overflow: hidden auto;
+
   text-align: center;
 
   @media (min-width: 768px) {

@@ -44,6 +44,7 @@ export default function DashboardPage() {
               <B.DashMenu changeContent={changeContent} content={content} />
             </C.Drawer>
           )}
+
           <S.Container>
             <S.HeaderMobile>
               <FiMenu onClick={toggleIsOpen} />
