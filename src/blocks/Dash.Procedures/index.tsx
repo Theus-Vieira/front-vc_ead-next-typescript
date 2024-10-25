@@ -57,18 +57,28 @@ export const DashProcedures = () => {
         </div>
 
         <div className="box-video">
-          {control.procedures.map((vd) => {
-            if (user.procedure_level >= vd.id || user.is_adm) {
-              return (
-                <C.VideoCard
-                  type="PROCEDURE"
-                  video={vd}
-                  key={uuid()}
-                  onActionPlay={() => setVideo(vd)}
-                />
-              );
-            }
-          })}
+          {control.procedures.length === 0 ? (
+            <>
+              <h2>
+                Este tópico estará disponível somente para a temporada de Julho
+                2025.
+              </h2>
+              <h2>Até lá!</h2>
+            </>
+          ) : (
+            control.procedures.map((vd) => {
+              if (user.procedure_level >= vd.id || user.is_adm) {
+                return (
+                  <C.VideoCard
+                    type="PROCEDURE"
+                    video={vd}
+                    key={uuid()}
+                    onActionPlay={() => setVideo(vd)}
+                  />
+                );
+              }
+            })
+          )}
         </div>
       </S.Container>
     </>
