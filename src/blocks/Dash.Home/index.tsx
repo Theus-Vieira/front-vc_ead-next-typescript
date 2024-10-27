@@ -2,6 +2,7 @@ import { useUser } from "@/providers";
 import * as S from "./styles";
 import { GrTask, GrWorkshop } from "react-icons/gr";
 import { SlDocs } from "react-icons/sl";
+import * as C from "@/components";
 
 interface IDashHomeProps {
   changeContent: (
@@ -11,10 +12,23 @@ interface IDashHomeProps {
 
 export const DashHome = ({ changeContent }: IDashHomeProps) => {
   const { user, info } = useUser();
+  const videoWelcome = {
+    id: 0,
+    videoId: "HL7ET6lfq6I",
+    videoName: "",
+    videoLink: "https://www.youtube.com/watch?v=HL7ET6lfq6I",
+    formLink: "",
+  };
 
   return (
     <S.Container>
       <h2>Olá, {user.username}!</h2>
+      <C.YouTubePlayer
+        classname="welcome-video"
+        video={videoWelcome}
+        isViewed={true}
+        callbackFinish={() => {}}
+      />
       <p>
         Bem vindo(a)! Está é a área do equipante e é aqui onde você aprenderá ou
         revisará o seu aprendizado sobre o Acampamento Voluntários de Cristo.
