@@ -103,3 +103,20 @@ export const BoxContent = styled.section`
     width: calc(100vw - 30rem);
   }
 `;
+
+export const Footer = styled.footer`
+  width: 100%;
+  height: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 2rem;
+
+  & > h2 {
+    color: ${(props) => props.theme.white};
+
+    font-size: 9pt;
+  }
+`;

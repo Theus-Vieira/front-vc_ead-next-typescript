@@ -35,14 +35,30 @@ export default function DashboardPage() {
       {user.objectId && (
         <>
           {isOpen && (
-            <C.Drawer
-              toggleIsOpen={toggleIsOpen}
-              buttonText="Logout"
-              buttonRoute="/"
-              buttonAction={async () => await userLogout()}
-            >
-              <B.DashMenu changeContent={changeContent} content={content} />
-            </C.Drawer>
+            <>
+              <C.Drawer
+                toggleIsOpen={toggleIsOpen}
+                buttonText="Logout"
+                buttonRoute="/"
+                buttonAction={async () => await userLogout()}
+              >
+                <B.DashMenu changeContent={changeContent} content={content} />
+                <S.Footer
+                  style={{
+                    position: "fixed",
+                    bottom: "1rem",
+                  }}
+                >
+                  <h2
+                    style={{
+                      color: "#d35400",
+                    }}
+                  >
+                    © 2024 Matheus Vieira
+                  </h2>
+                </S.Footer>
+              </C.Drawer>
+            </>
           )}
 
           <S.Container>
@@ -64,6 +80,10 @@ export default function DashboardPage() {
                   Logout
                 </C.Button>
               </div>
+
+              <S.Footer>
+                <h2>© 2024 Matheus Vieira</h2>
+              </S.Footer>
             </S.BoxMenu>
 
             <S.BoxContent>

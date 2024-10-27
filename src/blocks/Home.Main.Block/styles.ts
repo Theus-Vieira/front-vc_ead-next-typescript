@@ -12,6 +12,8 @@ export const Container = styled.section`
 
   padding: 2rem 2rem;
 
+  overflow: hidden auto;
+
   @media (min-width: 410px) {
     padding: 2rem 5rem;
   }
@@ -76,8 +78,8 @@ export const BoxLeft = styled.section`
 
   @media (min-width: 1200px) {
     & > div {
-      width: 50rem;
-      height: 50rem;
+      width: 40rem;
+      height: 40rem;
     }
   }
 `;
@@ -87,11 +89,13 @@ export const BoxRight = styled.section`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1rem;
 
   padding: 2rem;
+
+  overflow: hidden auto;
 
   text-align: center;
 
