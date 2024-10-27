@@ -6,12 +6,14 @@ interface IYouTubePlayerProps {
   video: T.IVideo;
   isViewed: boolean;
   callbackFinish: (() => void) | (() => Promise<void>);
+  classname?: string;
 }
 
 export const YouTubePlayer = ({
   video,
   isViewed,
   callbackFinish,
+  classname,
 }: IYouTubePlayerProps) => {
   const [player, setPlayer] = useState<any>(null);
 
@@ -40,6 +42,7 @@ export const YouTubePlayer = ({
     <S.Container>
       <h2>{video.videoName}</h2>
       <S.SYouTube
+        className={classname}
         videoId={video.videoId}
         opts={opts}
         onReady={handleReady}

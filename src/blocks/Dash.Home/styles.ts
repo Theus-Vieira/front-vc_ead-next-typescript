@@ -10,11 +10,13 @@ export const Container = styled.section`
   align-items: center;
   gap: 1rem;
 
+  text-align: center;
+
   & > h2 {
     width: 100%;
 
     font-size: 20pt;
-    text-align: left;
+    /* text-align: left; */
   }
 
   & > p {
@@ -22,6 +24,10 @@ export const Container = styled.section`
 
     font-size: 9pt;
     text-align: left;
+  }
+
+  & .welcome-video {
+    margin-bottom: 2rem;
   }
 
   @media (min-width: 768px) {
@@ -36,11 +42,21 @@ export const Container = styled.section`
 
       font-size: 10pt;
     }
+
+    & .welcome-video {
+      width: 85%;
+      height: 30rem;
+    }
   }
 
   @media (min-width: 1024px) {
     & > p {
       font-size: 12pt;
+    }
+
+    & .welcome-video {
+      width: 80%;
+      height: 40rem;
     }
   }
 `;
