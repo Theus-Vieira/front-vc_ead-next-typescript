@@ -10,6 +10,7 @@ interface IDashMenuProps {
 
 export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
   const { user } = useUser();
+
   return (
     <S.Container>
       <li
