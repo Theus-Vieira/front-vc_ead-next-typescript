@@ -15,6 +15,13 @@ export interface IUser {
   createdAt: Date;
   updatedAt: Date;
   sessionToken?: string;
+  is_filled_form: boolean;
+  did_interview: boolean;
+  pastoral_letter: boolean;
+  name: string;
+  church: string;
+  age: string;
+  cell_phone: string;
 }
 
 export interface IUpdateUser {
@@ -22,4 +29,11 @@ export interface IUpdateUser {
   meeting_level?: number;
   procedure_level?: number;
   password?: string;
+  is_filled_form?: boolean;
+  did_interview?: boolean;
+  pastoral_letter?: boolean;
+  name?: string;
+  church?: string;
+  age?: string;
+  cell_phone?: string;
 }

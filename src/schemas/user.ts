@@ -18,6 +18,12 @@ export const editUserSchema = z
   .object({
     username: z.string().optional(),
 
+    is_filled_form: z.boolean().optional(),
+
+    did_interview: z.boolean().optional(),
+
+    pastoral_letter: z.boolean().optional(),
+
     password: z.string().optional(),
   })
   .refine(
@@ -50,3 +56,13 @@ export const editUserSchema = z
         "A senha deve conter:\n- No mínimo 8 caracteres\n- Ao menos 1 letra maiúscula\n- Ao menos 1 letra minúscula\n- Ao menos 1 número\n- Ao menos 1 caracter especial\n- Não pode haver espaços em branco",
     }
   );
+
+export const editProfileSchema = z.object({
+  name: z.string().min(1, "campo obrigatório"),
+
+  church: z.string().min(1, "campo obrigatório"),
+
+  age: z.string().min(1, "campo obrigatório"),
+
+  cell_phone: z.string().min(1, "campo obrigatório"),
+});

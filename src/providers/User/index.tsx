@@ -147,6 +147,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         procedure_level,
         sessionToken,
         updatedAt,
+        name,
+        age,
+        church,
+        cell_phone,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
       }: T.IUser = response.data;
 
       setUser({
@@ -158,6 +165,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         sessionToken,
         updatedAt,
         username,
+        name,
+        age,
+        church,
+        cell_phone,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
       });
     } catch (error) {
       toast.error("Erro ao buscar informação do usuário");
@@ -223,6 +237,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         procedure_level,
         sessionToken,
         updatedAt,
+        name,
+        age,
+        church,
+        cell_phone,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
       }: T.IUser = response.data;
 
       setUser({
@@ -234,6 +255,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         sessionToken,
         updatedAt,
         username,
+        name,
+        age,
+        church,
+        cell_phone,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
       });
 
       localStorage.setItem("@VC-EAD-TOKEN", sessionToken!);
