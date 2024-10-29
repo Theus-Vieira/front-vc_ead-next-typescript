@@ -12,7 +12,7 @@ import { FiMenu } from "react-icons/fi";
 
 // type MENU = (typeof MENUS_PERMITIDOS)[number];
 
-type MENU = "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS";
+type MENU = "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS" | "PROFILE";
 
 export default function DashboardPage() {
   const [content, setContent] = useState<MENU>("HOME");
@@ -95,8 +95,10 @@ export default function DashboardPage() {
                 <B.DashMeetings />
               ) : content === "PROCEDURES" ? (
                 <B.DashProcedures />
-              ) : (
+              ) : content === "DOCS" ? (
                 <B.DashDocs />
+              ) : (
+                <B.DashProfile />
               )}
             </S.BoxContent>
           </S.Container>

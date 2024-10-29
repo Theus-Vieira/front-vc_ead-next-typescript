@@ -2,9 +2,9 @@ import { useUser } from "@/providers";
 import * as S from "./styles";
 
 interface IDashMenuProps {
-  content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS";
+  content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS" | "PROFILE";
   changeContent: (
-    value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS"
+    value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS" | "PROFILE"
   ) => void;
 }
 
@@ -20,6 +20,15 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         }}
       >
         Home
+      </li>
+
+      <li
+        className={content === "PROFILE" ? "selected" : "deselected"}
+        onClick={() => {
+          content !== "PROFILE" && changeContent("PROFILE");
+        }}
+      >
+        Perfil
       </li>
 
       {user.is_adm && (

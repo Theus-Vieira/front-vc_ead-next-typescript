@@ -151,6 +151,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         age,
         church,
         cell_phone,
+        shirt_size,
         did_interview,
         is_filled_form,
         pastoral_letter,
@@ -169,6 +170,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         age,
         church,
         cell_phone,
+        shirt_size,
         did_interview,
         is_filled_form,
         pastoral_letter,
@@ -198,6 +200,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           meeting_level,
           procedure_level,
           updatedAt,
+          age,
+          cell_phone,
+          church,
+          did_interview,
+          is_filled_form,
+          name,
+          pastoral_letter,
+          shirt_size,
         } = usr;
 
         return {
@@ -208,6 +218,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           meeting_level,
           procedure_level,
           updatedAt,
+          age,
+          cell_phone,
+          church,
+          did_interview,
+          is_filled_form,
+          name,
+          pastoral_letter,
+          shirt_size,
         };
       });
 
@@ -241,6 +259,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         age,
         church,
         cell_phone,
+        shirt_size,
         did_interview,
         is_filled_form,
         pastoral_letter,
@@ -259,6 +278,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         age,
         church,
         cell_phone,
+        shirt_size,
         did_interview,
         is_filled_form,
         pastoral_letter,

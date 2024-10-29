@@ -22,6 +22,7 @@ export interface IUser {
   church: string;
   age: string;
   cell_phone: string;
+  shirt_size: string;
 }
 
 export interface IUpdateUser {
@@ -36,4 +37,5 @@ export interface IUpdateUser {
   church?: string;
   age?: string;
   cell_phone?: string;
+  shirt_size?: string;
 }
