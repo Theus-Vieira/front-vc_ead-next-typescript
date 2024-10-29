@@ -11,6 +11,8 @@ export const DashProfile = () => {
     user: { name, age, cell_phone, church, shirt_size },
   } = useUser();
 
+  const [shirtOpt, setShirtOpt] = useState(shirt_size);
+
   const { isDarkMode } = useDarkMode();
 
   const toggleIsOpen = () => setIsOpen(!isOpen);
@@ -22,11 +24,11 @@ export const DashProfile = () => {
           <h2>Editar Perfil</h2>
 
           <C.Select
-            activeOption="M"
+            activeOption={shirtOpt}
             label="Tamanho da Camisa:"
-            options={["P", "M", "G"]}
+            options={["PP", "P", "M", "G", "GG", "EG"]}
             setActiveOption={(value: string) => {
-              console.log(value);
+              setShirtOpt(value);
             }}
           />
         </C.Modal>

@@ -64,7 +64,7 @@ export const BoxOptions = styled(motion.div)`
   padding: 0.5rem 0;
 
   position: absolute;
-  bottom: -8.5rem;
+  bottom: -15.5rem;
   z-index: 5000;
 
   border-radius: 0.5rem;
@@ -94,7 +94,6 @@ export const BoxOptions = styled(motion.div)`
     transition: 0.8s;
 
     &:hover {
-      /* transform: scale(0.95); */
       transform: translateX(0.5rem);
       transform-origin: left;
 
