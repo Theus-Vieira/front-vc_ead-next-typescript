@@ -3,6 +3,7 @@ import * as S from "./styles";
 import * as C from "@/components";
 import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
+import { EditProfileForm } from "../EditProfileForm ";
 
 export const DashProfile = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -10,8 +11,6 @@ export const DashProfile = () => {
   const {
     user: { name, age, cell_phone, church, shirt_size },
   } = useUser();
-
-  const [shirtOpt, setShirtOpt] = useState(shirt_size);
 
   const { isDarkMode } = useDarkMode();
 
@@ -23,14 +22,7 @@ export const DashProfile = () => {
         <C.Modal onAction={toggleIsOpen}>
           <h2>Editar Perfil</h2>
 
-          <C.Select
-            activeOption={shirtOpt}
-            label="Tamanho da Camisa:"
-            options={["PP", "P", "M", "G", "GG", "EG"]}
-            setActiveOption={(value: string) => {
-              setShirtOpt(value);
-            }}
-          />
+          <EditProfileForm callBackEditFinish={toggleIsOpen} />
         </C.Modal>
       )}
 

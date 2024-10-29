@@ -13,7 +13,9 @@ export const Container = styled.div`
   position: relative;
 
   & > span {
-    font-size: 12pt;
+    padding: 0 0.5rem;
+
+    font-size: 8pt;
     font-weight: bold;
 
     color: ${(props) => props.theme.txtPrimary};

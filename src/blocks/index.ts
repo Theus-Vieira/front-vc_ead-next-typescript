@@ -3,6 +3,7 @@ import { HomeMainBlock } from "./Home.Main.Block";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 import { EditUserForm } from "./EditUserForm";
+import { EditProfileForm } from "./EditProfileForm ";
 import { DashMenu } from "./Dash.Menu";
 import { DashHome } from "./Dash.Home";
 import { DashManage } from "./Dash.Manage";
@@ -17,6 +18,7 @@ export {
   LoginForm,
   RegisterForm,
   EditUserForm,
+  EditProfileForm,
   DashMenu,
   DashHome,
   DashManage,

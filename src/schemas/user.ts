@@ -65,6 +65,4 @@ export const editProfileSchema = z.object({
   age: z.string().min(1, "campo obrigatório"),
 
   cell_phone: z.string().min(1, "campo obrigatório"),
-
-  shirt_size: z.string().min(1, "campo obrigatório"),
 });
