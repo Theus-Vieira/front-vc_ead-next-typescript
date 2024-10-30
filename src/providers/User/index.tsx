@@ -155,6 +155,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         did_interview,
         is_filled_form,
         pastoral_letter,
+        parents_authorization,
       }: T.IUser = response.data;
 
       setUser({
@@ -174,6 +175,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         did_interview,
         is_filled_form,
         pastoral_letter,
+        parents_authorization,
       });
     } catch (error) {
       toast.error("Erro ao buscar informação do usuário");
@@ -208,6 +210,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           name,
           pastoral_letter,
           shirt_size,
+          parents_authorization,
         } = usr;
 
         return {
@@ -226,6 +229,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           name,
           pastoral_letter,
           shirt_size,
+          parents_authorization,
         };
       });
 
@@ -263,6 +267,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         did_interview,
         is_filled_form,
         pastoral_letter,
+        parents_authorization,
       }: T.IUser = response.data;
 
       setUser({
@@ -282,6 +287,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         did_interview,
         is_filled_form,
         pastoral_letter,
+        parents_authorization,
       });
 
       localStorage.setItem("@VC-EAD-TOKEN", sessionToken!);

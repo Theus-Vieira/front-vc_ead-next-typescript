@@ -116,6 +116,10 @@ export const Container = styled.section<IContainerProps>`
 
       font-size: 9pt;
     }
+
+    & > svg {
+      font-size: 12pt;
+    }
   }
 
   & > .box-action {
@@ -160,6 +164,10 @@ export const Container = styled.section<IContainerProps>`
       & > h3 {
         font-size: 14pt;
       }
+
+      & > svg {
+        font-size: 14pt;
+      }
     }
 
     & > .box-action {
@@ -181,6 +189,10 @@ export const Container = styled.section<IContainerProps>`
     & > .box-level {
       min-width: 10rem;
       max-width: 10rem;
+
+      & > svg {
+        font-size: 16pt;
+      }
     }
 
     & > .box-action {

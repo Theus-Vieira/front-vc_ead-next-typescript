@@ -24,6 +24,8 @@ export const editUserSchema = z
 
     pastoral_letter: z.boolean().optional(),
 
+    parents_authorization: z.boolean().optional(),
+
     password: z.string().optional(),
   })
   .refine(

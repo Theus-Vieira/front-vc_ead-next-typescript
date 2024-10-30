@@ -28,7 +28,8 @@ export const UserCard = ({ user }: IUserCardProps) => {
   }/${control.procedures.length}`;
 
   const isDocsComplete =
-    user.is_adm || (user.is_filled_form && user.pastoral_letter);
+    user.is_adm ||
+    (user.is_filled_form && user.pastoral_letter && user.parents_authorization);
 
   const { isDarkMode } = useDarkMode();
 
@@ -109,6 +110,33 @@ export const UserCard = ({ user }: IUserCardProps) => {
                 Fez Entrevista:{" "}
                 <span>{user.did_interview ? "Sim" : "Não"}</span>
               </li>
+
+              {user.age !== "N/A" && parseInt(user.age) < 18 && (
+                <li>
+                  Autorização dos Pais:{" "}
+                  <span>
+                    {user.is_adm || user.parents_authorization ? "Sim" : "Não"}
+                  </span>
+                </li>
+              )}
+
+              <li>
+                Assistiu as Reuniões:{" "}
+                <span>
+                  {user.is_adm || user.meeting_level === control.meetings.length
+                    ? "Sim"
+                    : "Não"}
+                </span>
+              </li>
+
+              {/* <li>
+                Assistiu os Procedimentos:{" "}
+                <span>
+                  {user.is_adm || user.meeting_level === control.meetings.length
+                    ? "Sim"
+                    : "Não"}
+                </span>
+              </li> */}
             </ul>
           </S.ContainerView>
         </Modal>
@@ -132,15 +160,11 @@ export const UserCard = ({ user }: IUserCardProps) => {
         </div>
 
         <div className="box-level">
-          <h3
-            title={`Documentação: ${isDocsComplete ? "Completa" : "Faltante"}`}
-          >
-            {isDocsComplete ? (
-              <FaCheck color="green" />
-            ) : (
-              <FaExclamationCircle color="red" />
-            )}
-          </h3>
+          {isDocsComplete ? (
+            <FaCheck color="green" title="Documentação Completa" />
+          ) : (
+            <FaExclamationCircle color="red" title="Documentação Incompleta" />
+          )}
         </div>
 
         <div className="box-action" onClick={toggleIsEditOpen}>

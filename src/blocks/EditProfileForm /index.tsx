@@ -15,6 +15,7 @@ interface IEdit {
   cell_phone: string;
   church: string;
   shirt_size?: string;
+  parents_authorization?: boolean;
 }
 
 interface IEditProfileFormProps {
@@ -43,6 +44,12 @@ export const EditProfileForm = ({
 
   const handleEdit = async (data: IEdit) => {
     data.shirt_size = shirtOpt;
+
+    if (data.age !== "N/A" && parseInt(data.age) >= 18) {
+      data.parents_authorization = true;
+    } else {
+      data.parents_authorization = false;
+    }
 
     if (
       data.age !== age ||

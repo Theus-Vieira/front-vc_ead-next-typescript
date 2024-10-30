@@ -34,6 +34,9 @@ export const EditUserForm = ({
   const [didInterview, setDidInterview] = useState<string>(
     user.did_interview ? "SIM" : "NÃO"
   );
+  const [parentsAuthorization, setParentsAuthorization] = useState<string>(
+    user.parents_authorization ? "SIM" : "NÃO"
+  );
 
   const {
     reset,
@@ -49,6 +52,7 @@ export const EditUserForm = ({
     const is_filled_form = fillForm === "SIM";
     const pastoral_letter = pastoralLetter === "SIM";
     const did_interview = didInterview === "SIM";
+    const parents_authorization = parentsAuthorization === "SIM";
 
     if (data.username === user.username) {
       delete data.username;
@@ -63,7 +67,8 @@ export const EditUserForm = ({
       !data.password &&
       is_filled_form === user.is_filled_form &&
       pastoral_letter === user.pastoral_letter &&
-      did_interview === user.did_interview
+      did_interview === user.did_interview &&
+      parents_authorization === user.parents_authorization
     ) {
       toast.error("Não é possível editar sem novos dados!");
       reset();
@@ -76,6 +81,7 @@ export const EditUserForm = ({
       is_filled_form,
       pastoral_letter,
       did_interview,
+      parents_authorization,
     };
 
     await updateUser(updatedUser, user.objectId, true);
@@ -147,6 +153,15 @@ export const EditUserForm = ({
           options={["SIM", "NÃO"]}
           setActiveOption={(value: string) => setDidInterview(value)}
         />
+
+        {user.age !== "N/A" && parseInt(user.age) < 18 && (
+          <C.Select
+            label="Autorização dos Pais: "
+            activeOption={parentsAuthorization}
+            options={["SIM", "NÃO"]}
+            setActiveOption={(value: string) => setParentsAuthorization(value)}
+          />
+        )}
       </div>
 
       <C.Button type="submit" radius=".8rem" height="3.5rem">

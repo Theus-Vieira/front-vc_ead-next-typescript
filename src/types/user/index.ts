@@ -18,6 +18,7 @@ export interface IUser {
   is_filled_form: boolean;
   did_interview: boolean;
   pastoral_letter: boolean;
+  parents_authorization: boolean;
   name: string;
   church: string;
   age: string;
@@ -33,6 +34,7 @@ export interface IUpdateUser {
   is_filled_form?: boolean;
   did_interview?: boolean;
   pastoral_letter?: boolean;
+  parents_authorization?: boolean;
   name?: string;
   church?: string;
   age?: string;
