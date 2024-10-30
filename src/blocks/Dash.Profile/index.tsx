@@ -32,16 +32,28 @@ export const DashProfile = () => {
 
         <S.List>
           <li>
-            Nome: <span>{name}</span>
+            Nome:{" "}
+            <span className={name === "N/A" ? "not-filled" : ""}>
+              {name === "N/A" ? "NÃO PREENCHIDO" : name}
+            </span>
           </li>
           <li>
-            Idade: <span>{age}</span>
+            Idade:{" "}
+            <span className={age === "N/A" ? "not-filled" : ""}>
+              {age === "N/A" ? "NÃO PREENCHIDO" : age}
+            </span>
           </li>
           <li>
-            Contato: <span>{cell_phone}</span>
+            Contato:{" "}
+            <span className={cell_phone === "N/A" ? "not-filled" : ""}>
+              {cell_phone === "N/A" ? "NÃO PREENCHIDO" : cell_phone}
+            </span>
           </li>
           <li>
-            Igreja: <span>{church}</span>
+            Igreja:{" "}
+            <span className={church === "N/A" ? "not-filled" : ""}>
+              {church === "N/A" ? "NÃO PREENCHIDO" : church}
+            </span>
           </li>
           <li>
             Tamanho da Camisa: <span>{shirt_size}</span>

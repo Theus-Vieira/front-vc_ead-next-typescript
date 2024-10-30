@@ -66,6 +66,10 @@ export const List = styled.ul`
 
     font-weight: bold;
 
+    & > .not-filled {
+      color: ${(props) => props.theme.error};
+    }
+
     & > span {
       font-size: 14pt;
       font-weight: normal;

@@ -24,6 +24,12 @@ export const DashHome = ({ changeContent }: IDashHomeProps) => {
 
   const isProfileIncomplete = user.name === "N/A";
 
+  const isDocsIncomplete =
+    !user.is_adm &&
+    (!user.is_filled_form ||
+      !user.parents_authorization ||
+      !user.pastoral_letter);
+
   return (
     <S.Container>
       <h2>Olá, {user.username}!</h2>
@@ -68,14 +74,18 @@ export const DashHome = ({ changeContent }: IDashHomeProps) => {
           <strong>{info.proceduresInfo}</strong>
         </S.Card>
 
-        <S.Card onClick={() => changeContent("DOCS")}>
+        <S.Card
+          onClick={() => changeContent("DOCS")}
+          isIncomplete={isDocsIncomplete}
+          title={isDocsIncomplete ? "Há documentos pendentes" : ""}
+        >
           <SlDocs />
           <h3>Documentos</h3>
         </S.Card>
 
         <S.Card
           onClick={() => changeContent("PROFILE")}
-          isProfileIncomplete={isProfileIncomplete}
+          isIncomplete={isProfileIncomplete}
           title={isProfileIncomplete ? "Complete seu perfil" : ""}
         >
           <FiUser />

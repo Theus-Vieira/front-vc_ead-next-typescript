@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ICardProps {
-  isProfileIncomplete?: boolean;
+  isIncomplete?: boolean;
 }
 
 export const Container = styled.section`
@@ -95,7 +95,7 @@ export const Card = styled.section<ICardProps>`
 
   border: 4px solid
     ${(props) =>
-      props.isProfileIncomplete ? props.theme.error : props.theme.txtPrimary};
+      props.isIncomplete ? props.theme.error : props.theme.txtPrimary};
   border-radius: 2rem;
 
   animation-name: pulse;
@@ -104,7 +104,7 @@ export const Card = styled.section<ICardProps>`
   animation-fill-mode: both;
   animation-iteration-count: infinite;
   animation-play-state: ${(props) =>
-    props.isProfileIncomplete ? "running" : "paused"};
+    props.isIncomplete ? "running" : "paused"};
 
   cursor: pointer;
   transition: 1.2s;
@@ -117,7 +117,7 @@ export const Card = styled.section<ICardProps>`
     transition: 1.2s;
 
     color: ${(props) =>
-      props.isProfileIncomplete ? props.theme.error : props.theme.txtPrimary};
+      props.isIncomplete ? props.theme.error : props.theme.txtPrimary};
   }
 
   & > h3 {
@@ -126,7 +126,7 @@ export const Card = styled.section<ICardProps>`
     transition: 1.2s;
 
     color: ${(props) =>
-      props.isProfileIncomplete ? props.theme.error : props.theme.txtPrimary};
+      props.isIncomplete ? props.theme.error : props.theme.txtPrimary};
   }
 
   & > strong {
@@ -139,15 +139,15 @@ export const Card = styled.section<ICardProps>`
     transition: 0.8s;
 
     border-color: ${(props) =>
-      props.isProfileIncomplete ? props.theme.error : props.theme.secondary};
+      props.isIncomplete ? props.theme.error : props.theme.secondary};
 
     color: ${(props) =>
-      props.isProfileIncomplete ? props.theme.error : props.theme.secondary};
+      props.isIncomplete ? props.theme.error : props.theme.secondary};
 
     & > svg,
     h3 {
       color: ${(props) =>
-        props.isProfileIncomplete ? props.theme.error : props.theme.secondary};
+        props.isIncomplete ? props.theme.error : props.theme.secondary};
 
       transition: 0.8s;
     }
