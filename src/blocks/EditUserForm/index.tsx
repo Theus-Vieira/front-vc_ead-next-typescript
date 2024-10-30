@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useUser } from "@/providers";
 import { FiLock, FiTrash, FiTrash2, FiUser } from "react-icons/fi";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 interface IEdit {
   username?: string;
@@ -24,6 +25,16 @@ export const EditUserForm = ({
 }: IEditUserFormProps) => {
   const { updateUser, deleteUser } = useUser();
 
+  const [fillForm, setFillForm] = useState<string>(
+    user.is_filled_form ? "SIM" : "NÃO"
+  );
+  const [pastoralLetter, setPastoralLetter] = useState<string>(
+    user.pastoral_letter ? "SIM" : "NÃO"
+  );
+  const [didInterview, setDidInterview] = useState<string>(
+    user.did_interview ? "SIM" : "NÃO"
+  );
+
   const {
     reset,
     register,
@@ -35,6 +46,10 @@ export const EditUserForm = ({
   });
 
   const handleEdit = async (data: IEdit) => {
+    const is_filled_form = fillForm === "SIM";
+    const pastoral_letter = pastoralLetter === "SIM";
+    const did_interview = didInterview === "SIM";
+
     if (data.username === user.username) {
       delete data.username;
     }
@@ -43,14 +58,27 @@ export const EditUserForm = ({
       delete data.password;
     }
 
-    if (!data.username && !data.password) {
+    if (
+      !data.username &&
+      !data.password &&
+      is_filled_form === user.is_filled_form &&
+      pastoral_letter === user.pastoral_letter &&
+      did_interview === user.did_interview
+    ) {
       toast.error("Não é possível editar sem novos dados!");
       reset();
       callBackEditFinish();
       return;
     }
 
-    await updateUser(data, user.objectId, true);
+    const updatedUser = {
+      ...data,
+      is_filled_form,
+      pastoral_letter,
+      did_interview,
+    };
+
+    await updateUser(updatedUser, user.objectId, true);
     reset();
     callBackEditFinish();
   };
@@ -95,6 +123,31 @@ export const EditUserForm = ({
         {...register("password")}
         error={errors.password?.message}
       />
+
+      <div className="selects">
+        <C.Select
+          label="Formulário:"
+          activeOption={fillForm}
+          options={["SIM", "NÃO"]}
+          setActiveOption={(value: string) => setFillForm(value)}
+        />
+
+        <C.Select
+          label="Carta Pastoral:"
+          activeOption={pastoralLetter}
+          options={["SIM", "NÃO"]}
+          setActiveOption={(value: string) => setPastoralLetter(value)}
+        />
+      </div>
+
+      <div className="selects">
+        <C.Select
+          label="Entrevista: "
+          activeOption={didInterview}
+          options={["SIM", "NÃO"]}
+          setActiveOption={(value: string) => setDidInterview(value)}
+        />
+      </div>
 
       <C.Button type="submit" radius=".8rem" height="3.5rem">
         Editar

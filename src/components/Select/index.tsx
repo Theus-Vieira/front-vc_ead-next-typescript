@@ -27,6 +27,7 @@ export const Select = ({
       </div>
       {isOpen && (
         <S.BoxOptions
+          className="box-opt"
           transition={{
             duration: 4,
             type: "spring",
