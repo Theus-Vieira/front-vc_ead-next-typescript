@@ -32,19 +32,18 @@ export const Container = styled.section`
   }
 
   & > .container-actions {
-    width: 90%;
+    width: 100%;
 
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
 
     margin-top: 2rem;
     margin-bottom: 2rem;
 
     & > svg {
       font-size: 22pt;
-
-      border: 2px solid ${(props) => props.theme.txtPrimary};
-      border-radius: 50%;
 
       transition: 1.2s;
 
