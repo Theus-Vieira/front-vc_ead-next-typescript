@@ -22,6 +22,45 @@ export const ContainerEdit = styled.section`
   }
 `;
 
+export const ContainerView = styled.section`
+  width: 25rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  & > h2 {
+    font-size: 18pt;
+  }
+
+  & > ul {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    list-style: none;
+
+    & > li {
+      font-size: 12pt;
+      font-weight: bold;
+
+      & > .whats {
+        font-weight: bold;
+
+        color: ${(props) => props.theme.success};
+      }
+
+      & > span {
+        font-weight: normal;
+      }
+    }
+  }
+`;
+
 export const Container = styled.section<IContainerProps>`
   width: 100%;
   height: 4rem;
@@ -36,13 +75,16 @@ export const Container = styled.section<IContainerProps>`
   white-space: nowrap;
 
   & > .box-username {
-    width: calc(100% - 14rem);
+    min-width: calc(100% - 19rem);
+    max-width: calc(100% - 19rem);
     height: 100%;
 
     display: flex;
     align-items: center;
 
     padding: 1rem;
+
+    cursor: pointer;
 
     & > h3 {
       width: 100%;
@@ -56,7 +98,8 @@ export const Container = styled.section<IContainerProps>`
   }
 
   & > .box-level {
-    width: 5rem;
+    min-width: 5rem;
+    max-width: 5rem;
     height: 100%;
 
     display: flex;
@@ -76,7 +119,8 @@ export const Container = styled.section<IContainerProps>`
   }
 
   & > .box-action {
-    width: 4rem;
+    min-width: 4rem;
+    max-width: 4rem;
     height: 100%;
 
     display: flex;
@@ -99,7 +143,8 @@ export const Container = styled.section<IContainerProps>`
 
   @media (min-width: 768px) {
     & > .box-username {
-      width: calc(100% - 26rem);
+      min-width: calc(100% - 35rem);
+      max-width: calc(100% - 35rem);
 
       padding: 2rem;
 
@@ -109,7 +154,8 @@ export const Container = styled.section<IContainerProps>`
     }
 
     & > .box-level {
-      width: 9rem;
+      min-width: 9rem;
+      max-width: 9rem;
 
       & > h3 {
         font-size: 14pt;
@@ -117,7 +163,8 @@ export const Container = styled.section<IContainerProps>`
     }
 
     & > .box-action {
-      width: 8rem;
+      min-width: 8rem;
+      max-width: 8rem;
 
       & > svg {
         font-size: 16pt;
@@ -127,15 +174,18 @@ export const Container = styled.section<IContainerProps>`
 
   @media (min-width: 1024px) {
     & > .box-username {
-      width: calc(100% - 38rem);
+      min-width: calc(100% - 38rem);
+      max-width: calc(100% - 38rem);
     }
 
     & > .box-level {
-      width: 15rem;
+      min-width: 10rem;
+      max-width: 10rem;
     }
 
     & > .box-action {
-      width: 8rem;
+      min-width: 8rem;
+      max-width: 8rem;
     }
   }
 `;

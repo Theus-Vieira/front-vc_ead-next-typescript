@@ -30,7 +30,7 @@ export const DashManage = () => {
       <S.Container>
         <h2>Usuários</h2>
 
-        <div className="box-add">
+        <div className="container-actions">
           <FiPlus onClick={toggleIsAddOpen} />
         </div>
 
@@ -45,6 +45,10 @@ export const DashManage = () => {
 
           <div className="box-level">
             <h3>Procedimentos</h3>
+          </div>
+
+          <div className="box-level">
+            <h3>Documentação</h3>
           </div>
 
           <div className="box-action">
