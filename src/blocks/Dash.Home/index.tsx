@@ -2,16 +2,18 @@ import { useUser } from "@/providers";
 import * as S from "./styles";
 import { GrTask, GrWorkshop } from "react-icons/gr";
 import { SlDocs } from "react-icons/sl";
+import { FiUser } from "react-icons/fi";
 import * as C from "@/components";
 
 interface IDashHomeProps {
   changeContent: (
-    value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS"
+    value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS" | "PROFILE"
   ) => void;
 }
 
 export const DashHome = ({ changeContent }: IDashHomeProps) => {
   const { user, info } = useUser();
+
   const videoWelcome = {
     id: 0,
     videoId: "HL7ET6lfq6I",
@@ -19,6 +21,14 @@ export const DashHome = ({ changeContent }: IDashHomeProps) => {
     videoLink: "https://www.youtube.com/watch?v=HL7ET6lfq6I",
     formLink: "",
   };
+
+  const isProfileIncomplete = user.name === "N/A";
+
+  const isDocsIncomplete =
+    !user.is_adm &&
+    (!user.is_filled_form ||
+      !user.parents_authorization ||
+      !user.pastoral_letter);
 
   return (
     <S.Container>
@@ -64,9 +74,22 @@ export const DashHome = ({ changeContent }: IDashHomeProps) => {
           <strong>{info.proceduresInfo}</strong>
         </S.Card>
 
-        <S.Card onClick={() => changeContent("DOCS")}>
+        <S.Card
+          onClick={() => changeContent("DOCS")}
+          isIncomplete={isDocsIncomplete}
+          title={isDocsIncomplete ? "Há documentos pendentes" : ""}
+        >
           <SlDocs />
           <h3>Documentos</h3>
+        </S.Card>
+
+        <S.Card
+          onClick={() => changeContent("PROFILE")}
+          isIncomplete={isProfileIncomplete}
+          title={isProfileIncomplete ? "Complete seu perfil" : ""}
+        >
+          <FiUser />
+          <h3>Perfil</h3>
         </S.Card>
       </S.BoxCards>
     </S.Container>

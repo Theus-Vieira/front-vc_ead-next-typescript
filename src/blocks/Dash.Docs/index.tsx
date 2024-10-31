@@ -1,7 +1,13 @@
 import Link from "next/link";
 import * as S from "./styles";
+import { useDarkMode, useUser } from "@/providers";
 
 export const DashDocs = () => {
+  const { isDarkMode } = useDarkMode();
+  const {
+    user: { is_filled_form, parents_authorization, pastoral_letter },
+  } = useUser();
+
   return (
     <S.Container>
       <h2>Documentos</h2>
@@ -12,9 +18,20 @@ export const DashDocs = () => {
 
       <div className="box-links">
         <Link
+          href="https://forms.gle/iiag1nAofTb6shsAA"
+          target="_blank"
+          title={!is_filled_form ? "Não entregue" : ""}
+          className={!is_filled_form ? "not-delivered" : ""}
+        >
+          Formulário de Inscrição
+        </Link>
+
+        <Link
           href="/docs/pastoral_recommendation.pdf"
           download="Recomendação Pastoral"
           target="_blank"
+          title={!pastoral_letter ? "Não entregue" : ""}
+          className={!pastoral_letter ? "not-delivered" : ""}
         >
           Carta de Recomendação Pastoral
         </Link>
@@ -23,10 +40,16 @@ export const DashDocs = () => {
           href="/docs/parents_authorization.pdf"
           download="Autorização dos Pais"
           target="_blank"
+          title={!parents_authorization ? "Não entregue" : ""}
+          className={!parents_authorization ? "not-delivered" : ""}
         >
           Autorização dos Pais
         </Link>
       </div>
+
+      <h4 style={{ color: isDarkMode ? "yellow" : "red" }}>
+        * Há documentos pendentes!
+      </h4>
     </S.Container>
   );
 };

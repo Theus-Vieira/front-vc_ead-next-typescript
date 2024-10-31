@@ -2,6 +2,7 @@ import { DarkModeButton } from "./DarkModeButton";
 import { Drawer } from "./Drawer";
 import { Button } from "./Button";
 import { Input } from "./Input";
+import { Select } from "./Select";
 import { YouTubePlayer } from "./YouTubePlayer";
 import { Modal } from "./modal";
 import { VideoCard } from "./VideoCard";
@@ -16,4 +17,5 @@ export {
   Modal,
   VideoCard,
   UserCard,
+  Select,
 };

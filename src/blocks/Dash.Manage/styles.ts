@@ -31,20 +31,19 @@ export const Container = styled.section`
     font-size: 22pt;
   }
 
-  & > .box-add {
-    width: 90%;
+  & > .container-actions {
+    width: 100%;
 
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
 
     margin-top: 2rem;
     margin-bottom: 2rem;
 
     & > svg {
       font-size: 22pt;
-
-      border: 2px solid ${(props) => props.theme.txtPrimary};
-      border-radius: 50%;
 
       transition: 1.2s;
 
@@ -95,7 +94,8 @@ export const BoxHeader = styled.section`
   color: #f5f6fa;
 
   & > .box-username {
-    width: calc(100% - 14rem);
+    min-width: calc(100% - 19rem);
+    max-width: calc(100% - 19rem);
     height: 100%;
 
     display: flex;
@@ -115,7 +115,8 @@ export const BoxHeader = styled.section`
   }
 
   & > .box-level {
-    width: 5rem;
+    min-width: 5rem;
+    max-width: 5rem;
     height: 80%;
 
     display: flex;
@@ -135,7 +136,8 @@ export const BoxHeader = styled.section`
   }
 
   & > .box-action {
-    width: 4rem;
+    min-width: 4rem;
+    max-width: 4rem;
     height: 100%;
 
     display: flex;
@@ -156,31 +158,37 @@ export const BoxHeader = styled.section`
 
   @media (min-width: 768px) {
     & > .box-username {
-      width: calc(100% - 26rem);
+      min-width: calc(100% - 35rem);
+      max-width: calc(100% - 35rem);
 
       padding: 2rem;
     }
 
     & > .box-level {
-      width: 9rem;
+      min-width: 9rem;
+      max-width: 9rem;
     }
 
     & > .box-action {
-      width: 8rem;
+      min-width: 8rem;
+      max-width: 8rem;
     }
   }
 
   @media (min-width: 1024px) {
     & > .box-username {
-      width: calc(100% - 38rem);
+      min-width: calc(100% - 38rem);
+      max-width: calc(100% - 38rem);
     }
 
     & > .box-level {
-      width: 15rem;
+      min-width: 10rem;
+      max-width: 10rem;
     }
 
     & > .box-action {
-      width: 8rem;
+      min-width: 8rem;
+      max-width: 8rem;
     }
   }
 `;

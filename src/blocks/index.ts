@@ -3,12 +3,14 @@ import { HomeMainBlock } from "./Home.Main.Block";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 import { EditUserForm } from "./EditUserForm";
+import { EditProfileForm } from "./EditProfileForm ";
 import { DashMenu } from "./Dash.Menu";
 import { DashHome } from "./Dash.Home";
 import { DashManage } from "./Dash.Manage";
 import { DashMeetings } from "./Dash.Meetings";
 import { DashProcedures } from "./Dash.Procedures";
 import { DashDocs } from "./Dash.Docs";
+import { DashProfile } from "./Dash.Profile";
 
 export {
   Header,
@@ -16,10 +18,12 @@ export {
   LoginForm,
   RegisterForm,
   EditUserForm,
+  EditProfileForm,
   DashMenu,
   DashHome,
   DashManage,
   DashMeetings,
   DashProcedures,
   DashDocs,
+  DashProfile,
 };

@@ -12,6 +12,9 @@ import { api } from "@/api";
 import { toast } from "react-toastify";
 import "dotenv/config";
 
+import ExcelJS from "exceljs";
+import { saveAs } from "file-saver";
+
 interface IInfo {
   meetingsInfo: string;
   proceduresInfo: string;
@@ -32,6 +35,7 @@ interface IUserContext {
   deleteUser: (usr: T.IUser) => Promise<void>;
   retrieveUser: (token?: string) => Promise<void>;
   loadUsers: () => Promise<void>;
+  downloadSheet: () => Promise<void>;
 }
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -147,6 +151,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         procedure_level,
         sessionToken,
         updatedAt,
+        name,
+        age,
+        church,
+        cell_phone,
+        shirt_size,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
+        parents_authorization,
       }: T.IUser = response.data;
 
       setUser({
@@ -158,6 +171,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         sessionToken,
         updatedAt,
         username,
+        name,
+        age,
+        church,
+        cell_phone,
+        shirt_size,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
+        parents_authorization,
       });
     } catch (error) {
       toast.error("Erro ao buscar informação do usuário");
@@ -184,6 +206,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           meeting_level,
           procedure_level,
           updatedAt,
+          age,
+          cell_phone,
+          church,
+          did_interview,
+          is_filled_form,
+          name,
+          pastoral_letter,
+          shirt_size,
+          parents_authorization,
         } = usr;
 
         return {
@@ -194,6 +225,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           meeting_level,
           procedure_level,
           updatedAt,
+          age,
+          cell_phone,
+          church,
+          did_interview,
+          is_filled_form,
+          name,
+          pastoral_letter,
+          shirt_size,
+          parents_authorization,
         };
       });
 
@@ -223,6 +263,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         procedure_level,
         sessionToken,
         updatedAt,
+        name,
+        age,
+        church,
+        cell_phone,
+        shirt_size,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
+        parents_authorization,
       }: T.IUser = response.data;
 
       setUser({
@@ -234,6 +283,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         sessionToken,
         updatedAt,
         username,
+        name,
+        age,
+        church,
+        cell_phone,
+        shirt_size,
+        did_interview,
+        is_filled_form,
+        pastoral_letter,
+        parents_authorization,
       });
 
       localStorage.setItem("@VC-EAD-TOKEN", sessionToken!);
@@ -265,6 +323,85 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       toast.error("Erro ao fazer logout");
     }
+  };
+
+  const downloadSheet = async () => {
+    const fileName = "Relação de Equipantes";
+
+    const data = users.map((usr, i) => {
+      const sheetObject: T.ISheetObject = {
+        id: i + 1,
+        Nome: usr.name !== "N/A" ? usr.name : usr.username,
+        Idade: usr.age !== "N/A" ? parseInt(usr.age) : 0,
+        Igreja: usr.church !== "N/A" ? usr.church : "NÃO INFORMADO",
+        Contato: usr.cell_phone !== "N/A" ? usr.cell_phone : "NÃO INFORMADO",
+        Link_Contato:
+          usr.cell_phone === "N/A"
+            ? "NÃO INFORMADO"
+            : `https://wa.me/5581${usr.cell_phone
+                .split(")")[1]
+                .replaceAll(" ", "")
+                .replace("-", "")}`,
+        Tamanho_Camisa:
+          usr.shirt_size !== "N/A" ? usr.shirt_size : "NÃO INFORMADO",
+        Formulário: usr.is_filled_form ? "SIM" : "NÃO",
+        Carta_Pastoral: usr.pastoral_letter ? "SIM" : "NÃO",
+        Autorização_dos_Pais: usr.parents_authorization ? "SIM" : "NÃO",
+        Entrevista: usr.did_interview ? "SIM" : "NÃO",
+      };
+
+      return sheetObject;
+    });
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Equipantes");
+
+    const headerRow = worksheet.addRow(Object.keys(data[0]));
+    headerRow.eachCell((cell) => {
+      cell.font = { bold: true };
+      cell.alignment = { vertical: "middle", horizontal: "center" };
+      cell.fill = {
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFDDDDDD" },
+      };
+      cell.border = {
+        top: { style: "thin" },
+        left: { style: "thin" },
+        bottom: { style: "thin" },
+        right: { style: "thin" },
+      };
+    });
+
+    data.forEach((user) => {
+      const row = worksheet.addRow(Object.values(user));
+      row.eachCell((cell) => {
+        cell.alignment = { vertical: "middle", horizontal: "center" };
+        cell.border = {
+          top: { style: "thin" },
+          left: { style: "thin" },
+          bottom: { style: "thin" },
+          right: { style: "thin" },
+        };
+      });
+    });
+
+    worksheet.columns.forEach((column) => {
+      let maxLength = 0;
+      column.eachCell!({ includeEmpty: true }, (cell) => {
+        const cellLength = cell.value ? cell.value.toString().length : 10;
+        if (cellLength > maxLength) {
+          maxLength = cellLength;
+        }
+      });
+      column.width = maxLength + 2;
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    saveAs(blob, `${fileName}.xlsx`);
   };
 
   useEffect(() => {
@@ -308,6 +445,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         loadUsers,
         retrieveUser,
         info,
+        downloadSheet,
       }}
     >
       {children}

@@ -46,4 +46,20 @@ export const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme.txtPrimary};
   }
 
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    
+    50% {
+      transform: scale(1.05);
+
+    }
+    
+    100% {
+      transform: scale(1);
+
+    }
+  }
 `;

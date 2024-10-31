@@ -29,6 +29,10 @@ export const Container = styled.section`
 
     margin-top: 4rem;
 
+    & > .not-delivered {
+      color: ${(props) => props.theme.error};
+    }
+
     & > a {
       font-size: 12pt;
       font-weight: bold;
@@ -42,5 +46,19 @@ export const Container = styled.section`
         transition: 0.8s;
       }
     }
+  }
+
+  & > h4 {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+
+    animation-name: pulse;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+
+    font-size: 12pt;
   }
 `;
