@@ -33,13 +33,16 @@ export const UserCard = ({ user }: IUserCardProps) => {
 
   const { isDarkMode } = useDarkMode();
 
+  const userDDD = user.cell_phone.split(")")[0].replace("(", "");
+  const userPhoneNumber =
+    user.cell_phone !== "N/A"
+      ? user.cell_phone.split(")")[1].replaceAll(" ", "").replace("-", "")
+      : "";
+
   const whatsLink =
     user.cell_phone === "N/A"
       ? "Não Preenchido"
-      : `https://wa.me/5581${user.cell_phone
-          .split(")")[1]
-          .replaceAll(" ", "")
-          .replace("-", "")}`;
+      : `https://wa.me/55${userDDD}${userPhoneNumber}`;
 
   return (
     <>
