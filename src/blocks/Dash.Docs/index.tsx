@@ -5,7 +5,12 @@ import { useDarkMode, useUser } from "@/providers";
 export const DashDocs = () => {
   const { isDarkMode } = useDarkMode();
   const {
-    user: { is_filled_form, parents_authorization, pastoral_letter },
+    user: {
+      is_filled_form,
+      parents_authorization,
+      pastoral_letter,
+      did_interview,
+    },
   } = useUser();
 
   return (
@@ -44,6 +49,15 @@ export const DashDocs = () => {
           className={!parents_authorization ? "not-delivered" : ""}
         >
           Autorização dos Pais
+        </Link>
+
+        <Link
+          href="https://calendly.com/willbarros13/60min"
+          target="_blank"
+          title={!did_interview ? "Faça a sua entrevista" : ""}
+          className={!did_interview ? "not-delivered" : ""}
+        >
+          Agende a Sua Entrevista
         </Link>
       </div>
 
