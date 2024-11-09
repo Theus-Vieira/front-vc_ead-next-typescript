@@ -7,6 +7,7 @@ import { YouTubePlayer } from "./YouTubePlayer";
 import { Modal } from "./modal";
 import { VideoCard } from "./VideoCard";
 import { UserCard } from "./UserCard";
+import { BookCard } from "./BookCard";
 
 export {
   DarkModeButton,
@@ -18,4 +19,5 @@ export {
   VideoCard,
   UserCard,
   Select,
+  BookCard,
 };

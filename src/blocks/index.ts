@@ -11,6 +11,7 @@ import { DashMeetings } from "./Dash.Meetings";
 import { DashProcedures } from "./Dash.Procedures";
 import { DashDocs } from "./Dash.Docs";
 import { DashProfile } from "./Dash.Profile";
+import { DashLibrary } from "./Dash.Library";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   DashProcedures,
   DashDocs,
   DashProfile,
+  DashLibrary,
 };
