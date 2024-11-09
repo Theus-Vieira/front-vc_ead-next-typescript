@@ -22,9 +22,10 @@ export const Container = styled.section`
     width: 100%;
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 3rem;
 
     margin-top: 4rem;
   }
