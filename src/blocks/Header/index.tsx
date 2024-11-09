@@ -23,25 +23,21 @@ export const Header = () => {
           buttonRoute="/login"
         >
           <S.MobileNav>
+            <li onClick={() => navigator.push("/")}>Home</li>
+
             <Link href="https://forms.gle/iiag1nAofTb6shsAA" target="_blank">
               Inscrição
             </Link>
 
             <Link
-              href="/docs/pastoral_recommendation.pdf"
-              download="Recomendação Pastoral"
+              href="/docs/books/louco_amor.pdf"
+              download="Louco Amor"
               target="_blank"
             >
-              Carta de Recomendação Pastoral
+              Leitura da Temporada
             </Link>
 
-            <Link
-              href="/docs/parents_authorization.pdf"
-              download="Autorização dos Pais"
-              target="_blank"
-            >
-              Autorização dos Pais
-            </Link>
+            <li onClick={() => navigator.push("/aboutus")}>Quem Somos</li>
           </S.MobileNav>
         </C.Drawer>
       )}
@@ -55,25 +51,21 @@ export const Header = () => {
         </div>
 
         <S.Nav>
+          <li onClick={() => navigator.push("/")}>Home</li>
+
           <Link href="https://forms.gle/iiag1nAofTb6shsAA" target="_blank">
             Inscrição
           </Link>
 
           <Link
-            href="/docs/pastoral_recommendation.pdf"
-            download="Recomendação Pastoral"
+            href="/docs/books/louco_amor.pdf"
+            download="Louco Amor"
             target="_blank"
           >
-            Carta de Recomendação Pastoral
+            Leitura da Temporada
           </Link>
 
-          <Link
-            href="/docs/parents_authorization.pdf"
-            download="Autorização dos Pais"
-            target="_blank"
-          >
-            Autorização dos Pais
-          </Link>
+          <li onClick={() => navigator.push("/aboutus")}>Quem Somos</li>
         </S.Nav>
 
         <div className="container-button">
