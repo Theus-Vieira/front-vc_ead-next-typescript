@@ -18,6 +18,11 @@ export const Container = styled.section`
     font-size: 12pt;
   }
 
+  & > .container-actions {
+    width: 80%;
+    min-height: 3rem;
+  }
+
   & > .box-links {
     width: 100%;
 
@@ -28,5 +33,6 @@ export const Container = styled.section`
     gap: 3rem;
 
     margin-top: 4rem;
+    padding-bottom: 4rem;
   }
 `;
