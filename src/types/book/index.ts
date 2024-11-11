@@ -1,6 +1,6 @@
 export interface IBook {
   name: string;
-  path: string;
+  href: string;
   image: string;
   author: string;
 }

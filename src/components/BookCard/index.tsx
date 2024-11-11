@@ -9,8 +9,8 @@ interface IBookCardProps {
 export const BookCard = ({ book }: IBookCardProps) => {
   return (
     <Link
-      href={book.path}
-      download={`${book.name} - ${book.author}`}
+      href={book.href}
+      // download={`${book.name} - ${book.author}`}
       target="_blank"
       title={`${book.name} - ${book.author}`}
     >
