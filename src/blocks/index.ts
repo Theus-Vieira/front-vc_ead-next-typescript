@@ -4,6 +4,7 @@ import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 import { EditUserForm } from "./EditUserForm";
 import { EditProfileForm } from "./EditProfileForm ";
+import { EnrollmentForm } from "./EnrollmentForm";
 import { DashMenu } from "./Dash.Menu";
 import { DashHome } from "./Dash.Home";
 import { DashManage } from "./Dash.Manage";
@@ -20,6 +21,7 @@ export {
   RegisterForm,
   EditUserForm,
   EditProfileForm,
+  EnrollmentForm,
   DashMenu,
   DashHome,
   DashManage,
