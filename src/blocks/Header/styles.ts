@@ -154,6 +154,8 @@ export const Nav = styled.ul`
     & > a {
       color: #f5f6fa;
 
+      transition: 0.8s;
+
       &:hover {
         color: ${(props) => props.theme.secondary};
 

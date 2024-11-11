@@ -201,4 +201,6 @@ export const BoxCards = styled.section`
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+
+  padding-bottom: 3rem;
 `;

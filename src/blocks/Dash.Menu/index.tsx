@@ -2,9 +2,23 @@ import { useUser } from "@/providers";
 import * as S from "./styles";
 
 interface IDashMenuProps {
-  content: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS" | "PROFILE";
+  content:
+    | "HOME"
+    | "MANAGE"
+    | "MEETINGS"
+    | "PROCEDURES"
+    | "DOCS"
+    | "PROFILE"
+    | "LIBRARY";
   changeContent: (
-    value: "HOME" | "MANAGE" | "MEETINGS" | "PROCEDURES" | "DOCS" | "PROFILE"
+    value:
+      | "HOME"
+      | "MANAGE"
+      | "MEETINGS"
+      | "PROCEDURES"
+      | "DOCS"
+      | "PROFILE"
+      | "LIBRARY"
   ) => void;
 }
 
@@ -58,6 +72,15 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         }}
       >
         Procedimentos
+      </li>
+
+      <li
+        className={content === "LIBRARY" ? "selected" : "deselected"}
+        onClick={() => {
+          content !== "LIBRARY" && changeContent("LIBRARY");
+        }}
+      >
+        Biblioteca
       </li>
 
       <li
