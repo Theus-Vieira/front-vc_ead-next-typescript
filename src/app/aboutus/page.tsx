@@ -19,12 +19,18 @@ export default function AboutUsPage() {
       <S.Container>
         <h2>Conheça a nossa história</h2>
 
-        <C.YouTubePlayer
+        <p>
+          Esta página está em construção e logo logo você poderá conhecer mais
+          da história incrível que tem este ministério de acampamento que
+          encanta a todos os que com ele se envolvem.
+        </p>
+
+        {/* <C.YouTubePlayer
           callbackFinish={() => {}}
           isViewed={false}
           video={videoAboutUs}
           classname="video-about-us"
-        />
+        /> */}
       </S.Container>
       <S.Footer>
         <h2>© 2024 Matheus Vieira</h2>

@@ -15,7 +15,17 @@ export const Container = styled.section`
   overflow: hidden auto;
 
   & > h2 {
+    padding: 0 10%;
+    margin-bottom: 2rem;
+
     font-size: 16pt;
+  }
+
+  & > p {
+    padding: 0 10%;
+
+    font-size: 12pt;
+    text-align: center;
   }
 
   @media (min-width: 768px) {
