@@ -9,4 +9,12 @@ export const meetings: T.IVideo[] = [
       "https://docs.google.com/forms/d/1Zj_SlXiW4xHV_um5OiXWiJ7pBVjDxtntu2HX3m6NDF8/viewform?edit_requested=true",
     videoLink: "https://www.youtube.com/watch?v=T5Duw_ltbzU",
   },
+  {
+    id: 1,
+    videoId: "NdQh7VMPxAE",
+    videoName: "PERFIL DO EQUIPANTE",
+    formLink:
+      "https://docs.google.com/forms/d/1ff8W9kEckG6E5XO7m5HGYeHc9w1WUYuw_olvvV9iEcA/viewform?edit_requested=true",
+    videoLink: "https://www.youtube.com/watch?v=NdQh7VMPxAE",
+  },
 ];
