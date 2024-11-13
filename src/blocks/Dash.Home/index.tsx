@@ -32,6 +32,8 @@ export const DashHome = ({ changeContent }: IDashHomeProps) => {
 
   return (
     <S.Container>
+      <C.FloatWhats />
+
       <h2>Olá, {user.username}!</h2>
       <C.YouTubePlayer
         classname="welcome-video"
