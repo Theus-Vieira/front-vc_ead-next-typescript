@@ -20,9 +20,15 @@ interface IDashMenuProps {
       | "PROFILE"
       | "LIBRARY"
   ) => void;
+
+  callback?: () => void;
 }
 
-export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
+export const DashMenu = ({
+  changeContent,
+  content,
+  callback,
+}: IDashMenuProps) => {
   const { user } = useUser();
 
   return (
@@ -31,6 +37,7 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         className={content === "HOME" ? "selected" : "deselected"}
         onClick={() => {
           content !== "HOME" && changeContent("HOME");
+          callback && callback();
         }}
       >
         Home
@@ -40,6 +47,7 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         className={content === "PROFILE" ? "selected" : "deselected"}
         onClick={() => {
           content !== "PROFILE" && changeContent("PROFILE");
+          callback && callback();
         }}
       >
         Perfil
@@ -50,6 +58,7 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
           className={content === "MANAGE" ? "selected" : "deselected"}
           onClick={() => {
             content !== "MANAGE" && changeContent("MANAGE");
+            callback && callback();
           }}
         >
           Gerenciar
@@ -60,6 +69,7 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         className={content === "MEETINGS" ? "selected" : "deselected"}
         onClick={() => {
           content !== "MEETINGS" && changeContent("MEETINGS");
+          callback && callback();
         }}
       >
         Reuniões
@@ -69,6 +79,7 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         className={content === "PROCEDURES" ? "selected" : "deselected"}
         onClick={() => {
           content !== "PROCEDURES" && changeContent("PROCEDURES");
+          callback && callback();
         }}
       >
         Procedimentos
@@ -78,6 +89,7 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         className={content === "LIBRARY" ? "selected" : "deselected"}
         onClick={() => {
           content !== "LIBRARY" && changeContent("LIBRARY");
+          callback && callback();
         }}
       >
         Biblioteca
@@ -87,6 +99,7 @@ export const DashMenu = ({ changeContent, content }: IDashMenuProps) => {
         className={content === "DOCS" ? "selected" : "deselected"}
         onClick={() => {
           content !== "DOCS" && changeContent("DOCS");
+          callback && callback();
         }}
       >
         Documentos

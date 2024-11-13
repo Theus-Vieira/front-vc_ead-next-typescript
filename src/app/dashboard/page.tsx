@@ -49,7 +49,12 @@ export default function DashboardPage() {
                 buttonRoute="/"
                 buttonAction={async () => await userLogout()}
               >
-                <B.DashMenu changeContent={changeContent} content={content} />
+                <B.DashMenu
+                  changeContent={changeContent}
+                  content={content}
+                  callback={toggleIsOpen}
+                />
+
                 <S.Footer
                   style={{
                     position: "fixed",
