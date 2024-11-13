@@ -8,6 +8,7 @@ import { Modal } from "./modal";
 import { VideoCard } from "./VideoCard";
 import { UserCard } from "./UserCard";
 import { BookCard } from "./BookCard";
+import { FloatWhats } from "./FloatWhats";
 
 export {
   DarkModeButton,
@@ -20,4 +21,5 @@ export {
   UserCard,
   Select,
   BookCard,
+  FloatWhats,
 };
