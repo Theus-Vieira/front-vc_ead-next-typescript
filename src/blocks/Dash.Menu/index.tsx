@@ -104,7 +104,7 @@ export const DashMenu = ({
           callback && callback();
         }}
       >
-        Chat
+        Sofá
       </li>
 
       <li
