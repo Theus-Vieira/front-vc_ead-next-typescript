@@ -10,6 +10,7 @@ import { VideoCard } from "./VideoCard";
 import { UserCard } from "./UserCard";
 import { BookCard } from "./BookCard";
 import { FloatWhats } from "./FloatWhats";
+import { SpetchBubble } from "./SpetchBubble";
 
 export {
   DarkModeButton,
@@ -18,6 +19,7 @@ export {
   Input,
   TextArea,
   YouTubePlayer,
+  SpetchBubble,
   Modal,
   VideoCard,
   UserCard,

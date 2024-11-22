@@ -10,6 +10,13 @@ export const MessagesBox = styled.section`
   height: calc(100% - 8.5rem);
 
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.2rem;
+
+  padding: 1.5rem;
+
+  overflow-y: auto;
 
   & > h3 {
     width: 100%;
