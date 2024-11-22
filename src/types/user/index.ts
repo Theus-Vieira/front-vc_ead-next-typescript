@@ -24,6 +24,7 @@ export interface IUser {
   age: string;
   cell_phone: string;
   shirt_size: string;
+  is_chat_online: boolean;
 }
 
 export interface IUpdateUser {
@@ -40,4 +41,5 @@ export interface IUpdateUser {
   age?: string;
   cell_phone?: string;
   shirt_size?: string;
+  is_chat_online?: boolean;
 }
