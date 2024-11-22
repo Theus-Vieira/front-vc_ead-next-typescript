@@ -13,6 +13,7 @@ import { DashProcedures } from "./Dash.Procedures";
 import { DashDocs } from "./Dash.Docs";
 import { DashProfile } from "./Dash.Profile";
 import { DashLibrary } from "./Dash.Library";
+import { DashChat } from "./Dash.Chat";
 
 export {
   Header,
@@ -30,4 +31,5 @@ export {
   DashDocs,
   DashProfile,
   DashLibrary,
+  DashChat,
 };

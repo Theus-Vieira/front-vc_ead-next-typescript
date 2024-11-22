@@ -19,7 +19,8 @@ type MENU =
   | "PROCEDURES"
   | "DOCS"
   | "PROFILE"
-  | "LIBRARY";
+  | "LIBRARY"
+  | "CHAT";
 
 export default function DashboardPage() {
   const [content, setContent] = useState<MENU>("HOME");
@@ -111,6 +112,8 @@ export default function DashboardPage() {
                 <B.DashDocs />
               ) : content === "LIBRARY" ? (
                 <B.DashLibrary />
+              ) : content === "CHAT" ? (
+                <B.DashChat />
               ) : (
                 <B.DashProfile />
               )}
