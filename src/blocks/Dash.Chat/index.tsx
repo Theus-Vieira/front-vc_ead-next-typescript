@@ -1,7 +1,7 @@
 import * as S from "./styles";
 import * as C from "@/components";
 import { useUser } from "@/providers";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { toast } from "react-toastify";
 
