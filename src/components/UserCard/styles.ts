@@ -48,6 +48,8 @@ export const ContainerView = styled.section`
       font-size: 12pt;
       font-weight: bold;
 
+      text-align: left;
+
       & > .whats {
         font-weight: bold;
 
