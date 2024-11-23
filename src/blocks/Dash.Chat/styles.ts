@@ -11,12 +11,12 @@ export const MessagesBox = styled.section`
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 0.2rem;
 
   padding: 1.5rem;
 
-  overflow-y: auto;
+  overflow: hidden auto;
 
   & > h3 {
     width: 100%;

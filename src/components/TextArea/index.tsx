@@ -29,14 +29,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, ITextareaProps>(
 
     const handleKeyPress = (e: any) => {
       if (e.key === "Enter" && !e.shiftKey && !e.altKey && !e.ctrlKey) {
-        rows < maxRows && setRows(rows + 1);
+        iconAction && iconAction();
+        setRows(1);
       }
 
       if (e.shiftKey && e.key === "Enter") {
-        iconAction && iconAction();
-        // const dash = document.getElementById("dashchatmessages");
-        // dash?.scrollTo(0, dash.scrollHeight + 1000);
-        setRows(1);
+        rows < maxRows && setRows(rows + 1);
       }
     };
 
