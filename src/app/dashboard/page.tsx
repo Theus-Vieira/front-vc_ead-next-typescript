@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useUser } from "@/providers";
+import { useChat, useUser } from "@/providers";
 import { useRouter } from "next/navigation";
 import * as S from "./styles";
 import * as B from "@/blocks";
@@ -31,6 +31,7 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const { user, userLogout } = useUser();
+  const { disconnectChat, clearMessages } = useChat();
 
   const changeContent = (value: MENU) => setContent(value);
 
@@ -48,7 +49,11 @@ export default function DashboardPage() {
                 toggleIsOpen={toggleIsOpen}
                 buttonText="Logout"
                 buttonRoute="/"
-                buttonAction={async () => await userLogout()}
+                buttonAction={async () => {
+                  await userLogout();
+                  disconnectChat();
+                  clearMessages();
+                }}
               >
                 <B.DashMenu
                   changeContent={changeContent}
