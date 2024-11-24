@@ -31,12 +31,42 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const { user, userLogout } = useUser();
-  const { disconnectChat, clearMessages } = useChat();
+
+  const {
+    disconnectChat,
+    clearMessages,
+    connectChat,
+    socket,
+    addMessage,
+    setUsersOnline,
+  } = useChat();
 
   const changeContent = (value: MENU) => setContent(value);
 
   useEffect(() => {
     !user.objectId && router.push("/");
+
+    if (user) {
+      connectChat();
+
+      socket?.on("chat", (msg) => {
+        addMessage(msg);
+      });
+
+      socket?.on("users", (usrs) => {
+        setUsersOnline(usrs);
+      });
+
+      window.addEventListener("beforeunload", () => {
+        disconnectChat();
+        clearMessages();
+      });
+
+      return () => {
+        socket?.off("chat");
+        socket?.off("users");
+      };
+    }
   }, []);
 
   return (

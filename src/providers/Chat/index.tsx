@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useState, useContext, ReactNode } from "react";
+import {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { IMessage } from "@/types/message";
 import { Socket } from "socket.io-client";
 import { socket as SOCKET } from "@/socket";
@@ -17,6 +24,8 @@ interface IChatContext {
   sendMessage: (data: string[]) => void;
   clearMessages: () => void;
   usersOnline: IUser[];
+  setUsersOnline: Dispatch<SetStateAction<IUser[]>>;
+  socket: Socket | null;
 }
 
 const ChatContext = createContext<IChatContext>({} as IChatContext);
@@ -28,35 +37,30 @@ export const useChat = () => {
 };
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
-  const [messages, setMessages] = useState<IMessage[]>([]);
-  const [usersOnline, setUsersOnline] = useState<IUser[]>([]);
-
-  const [socket, setSocket] = useState<Socket | null>(null);
-
   const { user } = useUser();
 
+  const [messages, setMessages] = useState<IMessage[]>([]);
+  const [usersOnline, setUsersOnline] = useState<IUser[]>([]);
+  const [socket, setSocket] = useState<Socket | null>(null);
+
   const addMessage = (newMessage: IMessage) => {
-    setMessages([...messages, newMessage]);
+    setMessages((prev) => {
+      return [...prev, newMessage];
+    });
   };
 
   const connectChat = () => {
     const newSocket = SOCKET(user);
     setSocket(newSocket);
-
-    newSocket.on("chat", (msg: IMessage) => {
-      addMessage(msg);
-    });
-
-    newSocket.on("users", (usrs: IUser[]) => {
-      setUsersOnline(usrs);
-    });
   };
 
   const disconnectChat = () => {
-    socket?.offAny();
+    socket?.off("chat");
+    socket?.off("users");
 
     socket?.disconnect();
     setSocket(null);
+    clearMessages();
   };
 
   const sendMessage = (data: string[]) => {
@@ -68,9 +72,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       user,
     };
 
-    addMessage(newMessage);
-
     socket?.emit("chat", newMessage);
+    addMessage(newMessage);
   };
 
   const clearMessages = () => setMessages([]);
@@ -85,6 +88,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         disconnectChat,
         sendMessage,
         usersOnline,
+        socket,
+        setUsersOnline,
       }}
     >
       {children}

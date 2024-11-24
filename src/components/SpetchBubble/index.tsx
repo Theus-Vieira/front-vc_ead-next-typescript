@@ -39,7 +39,7 @@ export const SpetchBubble = ({
             )}
 
             <div className="box_content">
-              {!isLoggedUser && (
+              {!isLoggedUser && !isSameUser && (
                 <h4
                   style={{
                     color: isDarkMode ? "yellow" : "green",

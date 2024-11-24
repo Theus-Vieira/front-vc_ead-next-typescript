@@ -27,8 +27,6 @@ export const LoginForm = () => {
     try {
       await userLogin(data);
 
-      reset();
-
       setTimeout(() => {
         router.push("/dashboard");
       }, 3000);
