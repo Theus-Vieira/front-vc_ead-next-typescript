@@ -2,8 +2,8 @@ import { io } from "socket.io-client";
 import { IUser } from "@/types";
 import "dotenv/config";
 
-const isDev = true;
-const isWill = true;
+const isDev = false;
+const isWill = false;
 
 export const socket = (user: IUser) =>
   io(
@@ -11,7 +11,7 @@ export const socket = (user: IUser) =>
       ? isWill
         ? "http://192.168.1.13:3001"
         : "http://localhost:3001"
-      : "https://vc_ead.onrender.com",
+      : "https://vceadchat.onrender.com",
     {
       query: user,
     }
