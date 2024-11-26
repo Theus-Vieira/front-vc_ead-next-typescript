@@ -23,6 +23,7 @@ interface IInfo {
 interface IUserContext {
   user: T.IUser;
   users: T.IUser[];
+  countUsers: number;
   info: IInfo;
   userLogin: (data: T.ILoginSession) => Promise<void>;
   userLogout: () => Promise<void>;
@@ -49,6 +50,7 @@ export const useUser = () => {
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [users, setUsers] = useState<T.IUser[]>([]);
   const [user, setUser] = useState<T.IUser>({} as T.IUser);
+  const [countUsers, setCountUsers] = useState<number>(0);
 
   const [info, setInfo] = useState<IInfo>({
     meetingsInfo: `${user.meeting_level}/${control.meetings.length}`,
@@ -198,6 +200,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       });
 
       const count = response.data.count;
+
+      setCountUsers(count);
 
       const usersList = response.data.results.map((usr: T.IUser) => {
         const {
@@ -503,6 +507,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         retrieveUser,
         info,
         downloadSheet,
+        countUsers,
       }}
     >
       {children}
