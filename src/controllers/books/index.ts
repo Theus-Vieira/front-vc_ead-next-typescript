@@ -85,4 +85,10 @@ export const books: T.IBook[] = [
     href: "https://drive.google.com/file/d/1ULuF32oIvuNsg6FOP62wn5vyBKwphPkc/view?usp=sharing",
     image: "https://i.ibb.co/ZVFGQ8R/o-impostor-que-vive-em-mim.jpg",
   },
+  {
+    author: "Introdução de Timothy Keller",
+    name: "Catecismo Nova Cidade",
+    href: "https://drive.google.com/file/d/10eei3JJfY0LPQ5zP3RNYJMYggVZ3iq-P/view?usp=sharing",
+    image: "https://i.ibb.co/bgxpFLq/catecismo-nova-cidade.jpg",
+  },
 ];

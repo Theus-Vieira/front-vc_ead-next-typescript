@@ -1,4 +1,3 @@
-import Link from "next/link";
 import * as S from "./styles";
 import * as C from "@/components";
 import * as T from "@/types";

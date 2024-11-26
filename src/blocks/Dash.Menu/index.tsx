@@ -9,7 +9,8 @@ interface IDashMenuProps {
     | "PROCEDURES"
     | "DOCS"
     | "PROFILE"
-    | "LIBRARY";
+    | "LIBRARY"
+    | "CHAT";
   changeContent: (
     value:
       | "HOME"
@@ -19,6 +20,7 @@ interface IDashMenuProps {
       | "DOCS"
       | "PROFILE"
       | "LIBRARY"
+      | "CHAT"
   ) => void;
 
   callback?: () => void;
@@ -93,6 +95,16 @@ export const DashMenu = ({
         }}
       >
         Biblioteca
+      </li>
+
+      <li
+        className={content === "CHAT" ? "selected" : "deselected"}
+        onClick={() => {
+          content !== "CHAT" && changeContent("CHAT");
+          callback && callback();
+        }}
+      >
+        Sofá
       </li>
 
       <li
