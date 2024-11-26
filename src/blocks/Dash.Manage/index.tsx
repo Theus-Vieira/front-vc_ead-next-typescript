@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid";
 import { useEffect, useState } from "react";
 
 export const DashManage = () => {
-  const { users, loadUsers, downloadSheet } = useUser();
+  const { users, loadUsers, downloadSheet, countUsers } = useUser();
 
   const [usersToShow, setUsersToShow] = useState<T.IUser[]>([]);
   const [filter, setFilter] = useState<string>("");
@@ -55,7 +55,7 @@ export const DashManage = () => {
       )}
 
       <S.Container>
-        <h2>Usuários</h2>
+        <h2>Usuários ({countUsers})</h2>
 
         <div className="container-actions">
           <C.Input
