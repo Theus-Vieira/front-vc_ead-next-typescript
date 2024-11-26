@@ -68,8 +68,25 @@ export const DashChat = () => {
   }, [socket]);
 
   return (
-    <>
-      <S.Container>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "3rem",
+      }}
+    >
+      <h2>Sala de conversas em desenvolvimento</h2>
+      <h3>Aguarde...</h3>
+    </div>
+  );
+};
+
+/* 
+  <S.Container>
         <S.MessagesBox ref={containerRef}>
           {messages.map((msg, i, arr) => {
             let isSameUser = false;
@@ -113,6 +130,5 @@ export const DashChat = () => {
         <source src={sound} type="audio/wav" />
         seu navegador não suporta áudio
       </audio>
-    </>
-  );
-};
+
+*/
