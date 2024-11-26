@@ -195,9 +195,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const loadUsers = async () => {
     try {
-      const response: any = await api.get("/users", {
+      const response: any = await api.get("/users?skip=0&limit=100&count=1", {
         headers: { "X-Parse-Session-Token": user.sessionToken },
       });
+
+      const count = response.data.count;
 
       const usersList = response.data.results.map((usr: T.IUser) => {
         const {
@@ -241,7 +243,62 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         };
       });
 
-      setUsers(usersList);
+      if (count <= 100) {
+        setUsers(usersList);
+      }
+
+      if (count > 100) {
+        const response100200: any = await api.get(
+          "/users?skip=100&limit=100&count=1",
+          {
+            headers: { "X-Parse-Session-Token": user.sessionToken },
+          }
+        );
+
+        const usersList100200 = response100200.data.results.map(
+          (usr: T.IUser) => {
+            const {
+              objectId,
+              username,
+              createdAt,
+              is_adm,
+              meeting_level,
+              procedure_level,
+              updatedAt,
+              age,
+              cell_phone,
+              church,
+              did_interview,
+              is_filled_form,
+              name,
+              pastoral_letter,
+              shirt_size,
+              parents_authorization,
+            } = usr;
+
+            return {
+              objectId,
+              username,
+              createdAt,
+              is_adm,
+              meeting_level,
+              procedure_level,
+              updatedAt,
+              age,
+              cell_phone,
+              church,
+              did_interview,
+              is_filled_form,
+              name,
+              pastoral_letter,
+              shirt_size,
+              parents_authorization,
+            };
+          }
+        );
+
+        setUsers([...usersList, ...usersList100200]);
+      }
     } catch (error) {
       toast.error(
         "Erro ao buscar todos os usuários. Será necessário fazer o login novamente"

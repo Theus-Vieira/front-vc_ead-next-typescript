@@ -80,6 +80,7 @@ export const DashChat = () => {
   }, [socket]);
 
   return (
+<<<<<<< HEAD
     <>
       {isUsersOnlineOpen && (
         <C.Modal onAction={toggleIsUsersOnlineOpen}>
@@ -143,6 +144,63 @@ export const DashChat = () => {
               Lembre-se: O respeito e amor ao próximo DEVEM servir de guia para
               todas as áreas da nossa vida
             </p>
+=======
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "3rem",
+      }}
+    >
+      <h2>Sala de conversas em desenvolvimento</h2>
+      <h3>Aguarde...</h3>
+    </div>
+  );
+};
+
+/* 
+  <S.Container>
+        <S.MessagesBox ref={containerRef}>
+          {messages.map((msg, i, arr) => {
+            let isSameUser = false;
+
+            if (i > 0 && arr[i - 1].user?.username === msg.user?.username) {
+              isSameUser = true;
+            }
+
+            return (
+              <C.SpetchBubble
+                isSameUser={isSameUser}
+                message={msg}
+                position={
+                  msg.type === "system"
+                    ? "center"
+                    : msg.user?.username === user.username
+                    ? "right"
+                    : "left"
+                }
+                notch
+                key={uuid()}
+              />
+            );
+          })}
+        </S.MessagesBox>
+
+        <S.InputContainer>
+          <div className="input-box">
+            <C.TextArea
+              icon={IoSend}
+              IconAfter
+              placeholder="Mensagem..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              iconAction={handleSubmit}
+            />
+>>>>>>> a115709d393d8aced44b95f4b0f11627e635e7c3
           </div>
         ) : (
           <>
@@ -196,6 +254,5 @@ export const DashChat = () => {
         <source src={sound} type="audio/wav" />
         seu navegador não suporta áudio
       </audio>
-    </>
-  );
-};
+
+*/
