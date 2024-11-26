@@ -4,10 +4,13 @@ import * as C from "@/components";
 import { editUserSchema } from "@/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useUser } from "@/providers";
+import { useChat, useUser } from "@/providers";
 import { FiLock, FiTrash, FiTrash2, FiUser } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { IMessage } from "@/types/message";
+import { v4 as uuid } from "uuid";
+import { getDateHour } from "@/utils/date";
 
 interface IEdit {
   username?: string;
@@ -24,6 +27,7 @@ export const EditUserForm = ({
   callBackEditFinish,
 }: IEditUserFormProps) => {
   const { updateUser, deleteUser } = useUser();
+  const { socket, addMessage } = useChat();
 
   const [fillForm, setFillForm] = useState<string>(
     user.is_filled_form ? "SIM" : "NÃO"
@@ -77,6 +81,14 @@ export const EditUserForm = ({
       reset();
       callBackEditFinish();
       return;
+    }
+
+    if (is_ban && is_ban !== user.is_ban) {
+      socket?.emit("users", { user, isRehab: false });
+    }
+
+    if (!is_ban && is_ban !== user.is_ban) {
+      socket?.emit("users", { user, isRehab: true });
     }
 
     const updatedUser = {

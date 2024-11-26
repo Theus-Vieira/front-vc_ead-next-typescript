@@ -3,23 +3,28 @@ import * as C from "@/components";
 import { useChat, useUser } from "@/providers";
 import { useEffect, useRef, useState } from "react";
 import { IoSend } from "react-icons/io5";
-import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
-import { IMessage } from "@/types/message";
-import { getDateHour } from "@/utils/date";
+import { MdOnlinePrediction } from "react-icons/md";
+import { FaUserSlash } from "react-icons/fa";
 
 export const DashChat = () => {
+  const [isUsersOnlineOpen, setIsUsersOnlineOpen] = useState<boolean>(false);
+
   const { user } = useUser();
   const {
     usersOnline,
-    connectChat,
-    disconnectChat,
     sendMessage,
     messages,
     socket,
     addMessage,
     setUsersOnline,
   } = useChat();
+
+  const toggleIsUsersOnlineOpen = () => {
+    socket?.emit("getUsers");
+
+    setIsUsersOnlineOpen(!isUsersOnlineOpen);
+  };
 
   const sound = "/sounds/chat_notification.wav";
 
@@ -62,15 +67,35 @@ export const DashChat = () => {
         setUsersOnline(usrs);
       });
 
+      socket?.on("getUsers", (usrs) => {
+        setUsersOnline(usrs);
+      });
+
       return () => {
         socket?.off("chat");
         socket?.off("users");
+        socket?.off("getUsers");
       };
     }
   }, [socket]);
 
   return (
     <>
+      {isUsersOnlineOpen && (
+        <C.Modal onAction={toggleIsUsersOnlineOpen}>
+          <S.UsersOnlineBox>
+            <h3>Usuários Online</h3>
+            <ul>
+              {usersOnline.map((usr) => (
+                <li>
+                  {usr.username} {user.is_adm && <FaUserSlash />}
+                </li>
+              ))}
+            </ul>
+          </S.UsersOnlineBox>
+        </C.Modal>
+      )}
+
       <S.Container>
         {user.is_ban ? (
           <div
@@ -121,6 +146,11 @@ export const DashChat = () => {
           </div>
         ) : (
           <>
+            <MdOnlinePrediction
+              title="Usuários online"
+              onClick={toggleIsUsersOnlineOpen}
+            />
+
             <S.MessagesBox ref={containerRef}>
               {messages.map((msg, i, arr) => {
                 let isSameUser = false;
