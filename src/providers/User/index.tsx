@@ -160,7 +160,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         is_filled_form,
         pastoral_letter,
         parents_authorization,
-        is_chat_online,
       }: T.IUser = response.data;
 
       setUser({
@@ -181,7 +180,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         is_filled_form,
         pastoral_letter,
         parents_authorization,
-        is_chat_online,
       });
     } catch (error) {
       toast.error("Erro ao buscar informação do usuário");
@@ -217,7 +215,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           pastoral_letter,
           shirt_size,
           parents_authorization,
-          is_chat_online,
         } = usr;
 
         return {
@@ -237,7 +234,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           pastoral_letter,
           shirt_size,
           parents_authorization,
-          is_chat_online,
         };
       });
 
@@ -276,7 +272,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         is_filled_form,
         pastoral_letter,
         parents_authorization,
-        is_chat_online,
       }: T.IUser = response.data;
 
       setUser({
@@ -297,7 +292,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         is_filled_form,
         pastoral_letter,
         parents_authorization,
-        is_chat_online,
       });
 
       localStorage.setItem("@VC-EAD-TOKEN", sessionToken!);
@@ -320,8 +314,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           },
         }
       );
-
-      await updateUser({ is_chat_online: false }, user.objectId);
 
       localStorage.removeItem("@VC-EAD-TOKEN");
       setUser({} as T.IUser);
