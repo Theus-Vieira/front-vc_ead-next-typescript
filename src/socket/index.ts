@@ -2,7 +2,7 @@ import { io } from "socket.io-client";
 import { IUser } from "@/types";
 import "dotenv/config";
 
-const isDev = true;
+const isDev = false;
 const isWill = false;
 
 export const socket = (user: IUser) =>
