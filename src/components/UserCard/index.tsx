@@ -145,7 +145,7 @@ export const UserCard = ({ user }: IUserCardProps) => {
         </Modal>
       )}
 
-      <S.Container isAdm={user.is_adm}>
+      <S.Container isAdm={user.is_adm} isBan={user.is_ban}>
         <div className="box-username" onClick={toggleIsViewOpen}>
           <h3 title={user.username}>{user.username}</h3>
         </div>

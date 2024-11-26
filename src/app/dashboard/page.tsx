@@ -46,7 +46,7 @@ export default function DashboardPage() {
   useEffect(() => {
     !user.objectId && router.push("/");
 
-    if (user) {
+    if (user && !user.is_ban) {
       connectChat();
 
       socket?.on("chat", (msg) => {
