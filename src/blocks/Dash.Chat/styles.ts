@@ -29,6 +29,47 @@ export const Container = styled.section`
   }
 `;
 
+export const TermsBox = styled.section`
+  width: 25rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+
+  & > h3 {
+    font-size: 16pt;
+
+    color: ${(props) => props.theme.warning};
+  }
+
+  & > .paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    text-align: left;
+
+    & > p {
+      font-size: 7pt;
+    }
+
+    & > .list {
+      padding-left: 1.5rem;
+    }
+  }
+
+  & > small {
+    color: ${(props) => props.theme.warning};
+
+    animation-name: pulse;
+    animation-duration: 3s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+  }
+`;
+
 export const UsersOnlineBox = styled.section`
   width: 25rem;
   height: 30rem;
