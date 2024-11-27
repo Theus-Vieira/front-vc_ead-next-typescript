@@ -12,7 +12,7 @@ export const DashChat = () => {
   const [isUsersOnlineOpen, setIsUsersOnlineOpen] = useState<boolean>(false);
   const [isTermsOpen, setIsTermsOpen] = useState<boolean>(false);
 
-  const { user, updateUser } = useUser();
+  const { user, updateUser, retrieveUser } = useUser();
   const {
     usersOnline,
     sendMessage,
@@ -83,6 +83,7 @@ export const DashChat = () => {
 
     socket?.on("users", (usrs) => {
       setUsersOnline(usrs);
+      retrieveUser();
     });
 
     return () => {
@@ -155,7 +156,7 @@ export const DashChat = () => {
             <h3>Usuários Online</h3>
             <ul>
               {usersOnline.map((usr) => (
-                <li className={usr.is_adm ? "adm" : ""}>
+                <li>
                   <span>{usr.username}</span>
                   {user.is_adm && <FaUserSlash onClick={() => banUser(usr)} />}
                 </li>

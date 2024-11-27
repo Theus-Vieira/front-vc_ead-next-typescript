@@ -12,6 +12,7 @@ export const Container = styled.section`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 299;
 `;
 
 export const DeadBox = styled.section`
