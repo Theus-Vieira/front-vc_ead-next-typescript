@@ -84,11 +84,11 @@ export const EditUserForm = ({
     }
 
     if (is_ban && is_ban !== user.is_ban) {
-      socket?.emit("users", { user, isRehab: false });
+      socket?.emit("users", { user, type: "ban" });
     }
 
     if (!is_ban && is_ban !== user.is_ban) {
-      socket?.emit("users", { user, isRehab: true });
+      socket?.emit("users", { user, type: "rehab" });
     }
 
     const updatedUser = {

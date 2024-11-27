@@ -57,10 +57,6 @@ export default function DashboardPage() {
         setUsersOnline(usrs);
       });
 
-      socket?.on("getUsers", (usrs) => {
-        setUsersOnline(usrs);
-      });
-
       window.addEventListener("beforeunload", () => {
         disconnectChat();
         clearMessages();
@@ -69,7 +65,6 @@ export default function DashboardPage() {
       return () => {
         socket?.off("chat");
         socket?.off("users");
-        socket?.off("getUsers");
       };
     }
   }, []);

@@ -31,11 +31,63 @@ export const Container = styled.section`
 
 export const UsersOnlineBox = styled.section`
   width: 25rem;
+  height: 30rem;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
+
+  & > h3 {
+    font-size: 16pt;
+  }
+
+  & > ul {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5rem;
+
+    padding: 1rem;
+    list-style: none;
+
+    overflow: hidden auto;
+
+    & > li {
+      width: 100%;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 0.5rem;
+
+      border-radius: 0.7rem;
+      border: 1px solid ${(props) => props.theme.borderPrimary};
+
+      font-size: 12pt;
+
+      & > svg {
+        color: red;
+
+        cursor: pointer;
+        transition: 0.7s;
+
+        &:hover {
+          transform: scale(1.1);
+          transition: 1s;
+        }
+      }
+    }
+
+    & > .adm {
+      border: 1px solid orange;
+      color: orange;
+    }
+  }
 `;
 
 export const MessagesBox = styled.section`
