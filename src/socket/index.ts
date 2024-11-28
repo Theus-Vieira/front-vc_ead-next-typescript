@@ -2,17 +2,12 @@ import { io } from "socket.io-client";
 import { IUser } from "@/types";
 import "dotenv/config";
 
-const isDev = true;
-const isWill = true;
+const ip = process.env.IP;
+const port = process.env.PORT;
+const isDev = process.env.IS_DEV === "true";
+const socketURL = process.env.SOCKET_UR;
 
 export const socket = (user: IUser) =>
-  io(
-    isDev
-      ? isWill
-        ? "http://192.168.1.14:3001"
-        : "http://localhost:3001"
-      : "https://vceadchat.onrender.com",
-    {
-      query: user,
-    }
-  );
+  io(isDev ? `${ip}:${port}` : socketURL, {
+    query: user,
+  });

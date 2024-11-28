@@ -82,6 +82,24 @@ export const DashChat = () => {
     if (!isAccepted) {
       openTerms();
     }
+
+    if (!user.is_ban) {
+      socket?.on("chat", (msg) => {
+        addMessage(msg);
+      });
+
+      socket?.on("users", (usrs) => {
+        console.log(usrs);
+
+        setUsersOnline(usrs);
+        retrieveUser();
+      });
+
+      return () => {
+        socket.off("chat");
+        socket.off("users");
+      };
+    }
   }, []);
 
   return (

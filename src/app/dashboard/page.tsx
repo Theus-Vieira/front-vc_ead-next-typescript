@@ -49,22 +49,11 @@ export default function DashboardPage() {
     if (user && !user.is_ban) {
       if (!user.is_ban) {
         connectChat();
-
-        socket?.on("chat", (msg) => {
-          addMessage(msg);
-        });
-
-        socket?.on("users", (usrs) => {
-          setUsersOnline(usrs);
-          retrieveUser();
-        });
       }
 
       window.addEventListener("beforeunload", () => {
         disconnectChat();
         clearMessages();
-        socket.off("chat");
-        socket.off("users");
       });
 
       return () => {

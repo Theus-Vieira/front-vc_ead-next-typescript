@@ -73,7 +73,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     };
 
     socket?.emit("chat", newMessage);
-    // addMessage(newMessage);
   };
 
   const clearMessages = () => setMessages([]);
