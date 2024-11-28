@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useChat, useUser } from "@/providers";
+import { useUser } from "@/providers";
 import { useRouter } from "next/navigation";
 import * as S from "./styles";
 import * as B from "@/blocks";
@@ -32,41 +32,10 @@ export default function DashboardPage() {
 
   const { user, userLogout } = useUser();
 
-  const {
-    disconnectChat,
-    clearMessages,
-    connectChat,
-    socket,
-    addMessage,
-    setUsersOnline,
-  } = useChat();
-
   const changeContent = (value: MENU) => setContent(value);
 
   useEffect(() => {
     !user.objectId && router.push("/");
-
-    if (user) {
-      connectChat();
-
-      socket?.on("chat", (msg) => {
-        addMessage(msg);
-      });
-
-      socket?.on("users", (usrs) => {
-        setUsersOnline(usrs);
-      });
-
-      window.addEventListener("beforeunload", () => {
-        disconnectChat();
-        clearMessages();
-      });
-
-      return () => {
-        socket?.off("chat");
-        socket?.off("users");
-      };
-    }
   }, []);
 
   return (
@@ -81,8 +50,6 @@ export default function DashboardPage() {
                 buttonRoute="/"
                 buttonAction={async () => {
                   await userLogout();
-                  disconnectChat();
-                  clearMessages();
                 }}
               >
                 <B.DashMenu
