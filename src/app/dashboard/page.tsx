@@ -30,7 +30,7 @@ export default function DashboardPage() {
 
   const router = useRouter();
 
-  const { user, userLogout } = useUser();
+  const { user, userLogout, retrieveUser } = useUser();
 
   const {
     disconnectChat,
@@ -47,19 +47,24 @@ export default function DashboardPage() {
     !user.objectId && router.push("/");
 
     if (user && !user.is_ban) {
-      connectChat();
+      if (!user.is_ban) {
+        connectChat();
 
-      socket?.on("chat", (msg) => {
-        addMessage(msg);
-      });
+        socket?.on("chat", (msg) => {
+          addMessage(msg);
+        });
 
-      socket?.on("users", (usrs) => {
-        setUsersOnline(usrs);
-      });
+        socket?.on("users", (usrs) => {
+          setUsersOnline(usrs);
+          retrieveUser();
+        });
+      }
 
       window.addEventListener("beforeunload", () => {
         disconnectChat();
         clearMessages();
+        socket.off("chat");
+        socket.off("users");
       });
 
       return () => {

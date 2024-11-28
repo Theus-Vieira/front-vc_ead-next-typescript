@@ -20,6 +20,7 @@ export const DashChat = () => {
     socket,
     addMessage,
     setUsersOnline,
+    connectChat,
   } = useChat();
 
   const toggleIsUsersOnlineOpen = () => {
@@ -74,23 +75,6 @@ export const DashChat = () => {
       });
     }
   }, [messages]);
-
-  useEffect(() => {
-    socket?.on("chat", (msg) => {
-      playSound();
-      addMessage(msg);
-    });
-
-    socket?.on("users", (usrs) => {
-      setUsersOnline(usrs);
-      retrieveUser();
-    });
-
-    return () => {
-      socket?.off("chat");
-      socket?.off("users");
-    };
-  }, [socket]);
 
   useEffect(() => {
     const isAccepted = localStorage.getItem("@VC-EAD-ISACCEPTED");
