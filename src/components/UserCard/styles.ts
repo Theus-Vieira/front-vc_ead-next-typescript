@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface IContainerProps {
   isAdm: boolean;
+  isBan: boolean;
 }
 
 export const ContainerEdit = styled.section`
@@ -75,6 +76,12 @@ export const Container = styled.section<IContainerProps>`
   border-radius: 1rem;
 
   white-space: nowrap;
+
+  ${(props) =>
+    props.isBan &&
+    css`
+      background-color: ${(props) => props.theme.error}65;
+    `}
 
   & > .box-username {
     min-width: calc(100% - 19rem);

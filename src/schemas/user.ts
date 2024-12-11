@@ -27,6 +27,8 @@ export const editUserSchema = z
     parents_authorization: z.boolean().optional(),
 
     password: z.string().optional(),
+
+    is_ban: z.boolean().optional(),
   })
   .refine(
     ({ password }) => {
