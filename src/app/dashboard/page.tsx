@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useUser } from "@/providers";
+import { useChat, useUser } from "@/providers";
 import { useRouter } from "next/navigation";
 import * as S from "./styles";
 import * as B from "@/blocks";
@@ -30,12 +30,29 @@ export default function DashboardPage() {
 
   const router = useRouter();
 
-  const { user, userLogout } = useUser();
+  const { user, userLogout, retrieveUser } = useUser();
+  const { connectChat, disconnectChat, clearMessages, socket } = useChat();
 
   const changeContent = (value: MENU) => setContent(value);
 
   useEffect(() => {
     !user.objectId && router.push("/");
+
+    if (user && !user.is_ban) {
+      if (!user.is_ban) {
+        connectChat();
+      }
+
+      window.addEventListener("beforeunload", () => {
+        disconnectChat();
+        clearMessages();
+      });
+
+      return () => {
+        socket?.off("chat");
+        socket?.off("users");
+      };
+    }
   }, []);
 
   return (

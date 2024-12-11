@@ -4,10 +4,13 @@ import * as C from "@/components";
 import { editUserSchema } from "@/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useUser } from "@/providers";
+import { useChat, useUser } from "@/providers";
 import { FiLock, FiTrash, FiTrash2, FiUser } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { IMessage } from "@/types/message";
+import { v4 as uuid } from "uuid";
+import { getDateHour } from "@/utils/date";
 
 interface IEdit {
   username?: string;
@@ -24,6 +27,7 @@ export const EditUserForm = ({
   callBackEditFinish,
 }: IEditUserFormProps) => {
   const { updateUser, deleteUser } = useUser();
+  const { socket, addMessage } = useChat();
 
   const [fillForm, setFillForm] = useState<string>(
     user.is_filled_form ? "SIM" : "NÃO"
@@ -37,6 +41,7 @@ export const EditUserForm = ({
   const [parentsAuthorization, setParentsAuthorization] = useState<string>(
     user.parents_authorization ? "SIM" : "NÃO"
   );
+  const [isBan, setIsBan] = useState<string>(user.is_ban ? "SIM" : "NÃO");
 
   const {
     reset,
@@ -53,6 +58,7 @@ export const EditUserForm = ({
     const pastoral_letter = pastoralLetter === "SIM";
     const did_interview = didInterview === "SIM";
     const parents_authorization = parentsAuthorization === "SIM";
+    const is_ban = isBan === "SIM";
 
     if (data.username === user.username) {
       delete data.username;
@@ -68,12 +74,21 @@ export const EditUserForm = ({
       is_filled_form === user.is_filled_form &&
       pastoral_letter === user.pastoral_letter &&
       did_interview === user.did_interview &&
-      parents_authorization === user.parents_authorization
+      parents_authorization === user.parents_authorization &&
+      is_ban === user.is_ban
     ) {
       toast.error("Não é possível editar sem novos dados!");
       reset();
       callBackEditFinish();
       return;
+    }
+
+    if (is_ban && is_ban !== user.is_ban) {
+      socket?.emit("users", { user, type: "ban" });
+    }
+
+    if (!is_ban && is_ban !== user.is_ban) {
+      socket?.emit("users", { user, type: "rehab" });
     }
 
     const updatedUser = {
@@ -82,6 +97,7 @@ export const EditUserForm = ({
       pastoral_letter,
       did_interview,
       parents_authorization,
+      is_ban,
     };
 
     await updateUser(updatedUser, user.objectId, true);
@@ -162,6 +178,15 @@ export const EditUserForm = ({
             setActiveOption={(value: string) => setParentsAuthorization(value)}
           />
         )}
+      </div>
+
+      <div className="selects">
+        <C.Select
+          label="Banido: "
+          activeOption={isBan}
+          options={["SIM", "NÃO"]}
+          setActiveOption={(value: string) => setIsBan(value)}
+        />
       </div>
 
       <C.Button type="submit" radius=".8rem" height="3.5rem">

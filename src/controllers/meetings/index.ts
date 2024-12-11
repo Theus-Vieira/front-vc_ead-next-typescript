@@ -25,4 +25,12 @@ export const meetings: T.IVideo[] = [
       "https://docs.google.com/forms/d/1ajChT29-W81P2R8CHo30I1kc2zcVDS3GwXu6vdX1JfY/viewform?edit_requested=true",
     videoLink: "https://www.youtube.com/watch?v=KaLyBRYWOlI",
   },
+  {
+    id: 3,
+    videoId: "Rfj4edbqsoo",
+    videoName: "COMPROMISSO",
+    formLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLScNZYjH87ppK7K1fv0X51pyr7hl0umOjXGNX4fczuKtYM70xQ/viewform?uso=header",
+    videoLink: "https://www.youtube.com/watch?v=Rfj4edbqsoo",
+  },
 ];
